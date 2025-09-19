@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallagher Art School - Sign Up</title>
+    <style>
+        /* Gallagher Art School - Standalone HTML Styles */
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .gallagher-signup-container {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background and overlay */
+        .gallagher-signup-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
+
+        .gallagher-signup-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(59, 130, 246, 0.85), rgba(67, 56, 202, 0.9));
+            z-index: 2;
+        }
+
+        /* Admin button */
+        .gallagher-admin-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 20;
+        }
+
+        /* Main content layout */
+        .gallagher-main-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            min-height: 100vh;
+            flex-direction: row;
+        }
+
+        /* Enhanced Carousel panel */
+        .gallagher-carousel-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 300px;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            overflow: hidden;
+        }
+
+        /* Carousel content */
+        .gallagher-carousel-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .gallagher-carousel-content h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .gallagher-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .gallagher-slide-content h2 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+
+        .gallagher-slide-content p {
+            font-size: 1.125rem;
+            opacity: 0.9;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallagher-slide-cta {
+            background: rgba(147, 51, 234, 0.9);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .gallagher-slide-cta:hover {
+            background: rgba(126, 34, 206, 1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+        }
+
+        /* Form panel */
+        .gallagher-form-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .gallagher-signup-form {
+            width: 100%;
+            max-width: 448px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Step indicators */
+        .gallagher-step-indicators {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 0;
+        }
+
+        .gallagher-step-indicator {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            flex-shrink: 0;
+        }
+
+        .gallagher-step-indicator.active {
+            background: #000000;
+            color: white;
+        }
+
+        .gallagher-step-indicator.completed {
+            background: #22c55e;
+            color: white;
+        }
+
+        .gallagher-step-connector {
+            width: 48px;
+            height: 2px;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+            margin: 0 0.75rem;
+        }
+
+        .gallagher-step-connector.completed {
+            background: #22c55e;
+        }
+
+        /* Form header */
+        .gallagher-form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .gallagher-form-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .gallagher-form-header p {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        /* Progress bar */
+        .gallagher-progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .gallagher-progress-fill {
+            height: 100%;
+            background: #3b82f6;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Alerts */
+        .gallagher-alert {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .gallagher-alert-error {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+
+        .gallagher-alert-success {
+            background: #f0fdf4;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        /* Form styles */
+        .gallagher-form-step {
+            margin-bottom: 2rem;
+        }
+
+        .gallagher-form-group {
+            margin-bottom: 1rem;
+        }
+
+        .gallagher-form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .gallagher-form-row .gallagher-form-group {
+            flex: 1;
+        }
+
+        .gallagher-form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+            font-size: 0.875rem;
+        }
+
+        .gallagher-form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+        .gallagher-form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 0;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            background: #f3f3f5;
+            color: #1f2937;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 1rem;
+            padding-right: 2.5rem;
+            appearance: none;
+            outline: none;
+        }
+
+        .gallagher-form-group input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .gallagher-form-group select:focus {
+            outline: none;
+            box-shadow: none;
+            background: #f3f3f5;
+        }
+
+        .gallagher-form-group small {
+            display: block;
+            margin-top: 0.25rem;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+
+        /* Social buttons */
+        .gallagher-social-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gallagher-social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #374151;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .gallagher-social-btn:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        /* Divider */
+        .gallagher-divider {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .gallagher-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .gallagher-divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 1rem;
+            color: #6b7280;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        /* Checkbox grid */
+        .gallagher-checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .gallagher-checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .gallagher-checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .gallagher-checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        /* Buttons */
+        .gallagher-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 0.875rem;
+            line-height: 1;
+        }
+
+        .gallagher-btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .gallagher-btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .gallagher-btn-secondary {
+            background: transparent;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .gallagher-btn-secondary:hover {
+            background: #f9fafb;
+        }
+
+        .gallagher-btn-outline {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(4px);
+        }
+
+        .gallagher-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .gallagher-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Form navigation */
+        .gallagher-form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        /* Form footer */
+        .gallagher-form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .gallagher-form-footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .gallagher-form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Terms */
+        .gallagher-terms {
+            margin-top: 1rem;
+        }
+
+        .gallagher-terms small {
+            font-size: 0.75rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        /* Utility classes */
+        .gallagher-hidden {
+            display: none !important;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 1024px) {
+            .gallagher-main-content {
+                flex-direction: column;
+            }
+            
+            .gallagher-carousel-panel {
+                min-height: 250px;
+            }
+            
+            .gallagher-carousel-content h1 {
+                font-size: 2rem;
+            }
+            
+            .gallagher-form-panel {
+                padding: 1rem;
+            }
+            
+            .gallagher-form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .gallagher-checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .gallagher-signup-container {
+                font-size: 14px;
+            }
+            
+            .gallagher-social-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallagher-form-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .gallagher-step-indicators {
+                gap: 0;
+            }
+            
+            .gallagher-step-indicator {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .gallagher-step-connector {
+                width: 24px;
+                margin: 0 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallagher-signup-container">
+        <div class="gallagher-admin-button">
+            <button class="gallagher-btn gallagher-btn-outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                Admin Dashboard
+            </button>
+        </div>
+        
+        <div class="gallagher-main-content">
+            <!-- Left Panel - Enhanced Image Carousel -->
+            <div class="gallagher-carousel-panel">
+                <div class="gallagher-carousel-content">
+                    <h1>Gallagher Art School</h1>
+                    <p class="gallagher-subtitle">Expert instruction from an MFA Yale graduate</p>
+                    <div class="gallagher-slide-content">
+                        <h2>Master the Art of Drawing</h2>
+                        <p>From beginner sketches to advanced techniques</p>
+                        <button class="gallagher-slide-cta">Start Drawing</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Panel - Signup Form -->
+            <div class="gallagher-form-panel">
+                <div class="gallagher-signup-form">
+                    <!-- Step Indicators -->
+                    <div class="gallagher-step-indicators">
+                        <div class="gallagher-step-indicator active" data-step="0">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="gallagher-step-connector"></div>
+                        <div class="gallagher-step-indicator" data-step="1">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="13.5" cy="6.5" r=".5"/>
+                                <circle cx="17.5" cy="10.5" r=".5"/>
+                                <circle cx="8.5" cy="7.5" r=".5"/>
+                                <circle cx="6.5" cy="12.5" r=".5"/>
+                                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+                            </svg>
+                        </div>
+                        <div class="gallagher-step-connector"></div>
+                        <div class="gallagher-step-indicator" data-step="2">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="gallagher-form-header">
+                        <h3>Join Gallagher Art School</h3>
+                        <p id="gallagher-step-description">Tell us about yourself</p>
+                    </div>
+                    
+                    <div class="gallagher-progress-bar">
+                        <div class="gallagher-progress-fill" style="width: 33%"></div>
+                    </div>
+                    
+                    <!-- Error/Success Messages -->
+                    <div class="gallagher-alert gallagher-alert-error gallagher-hidden" id="gallagher-error">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        </svg>
+                        <span id="gallagher-error-text"></span>
+                    </div>
+                    
+                    <div class="gallagher-alert gallagher-alert-success gallagher-hidden" id="gallagher-success">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22,4 12,14.01 9,11.01"/>
+                        </svg>
+                        <span>Account created successfully! Welcome to Gallagher Art School!</span>
+                    </div>
+                    
+                    <form id="gallagher-signup-form">
+                        <!-- Step 1: Personal Info -->
+                        <div class="gallagher-form-step" id="gallagher-step-1">
+                            <!-- Social Login -->
+                            <div class="gallagher-social-buttons">
+                                <button type="button" class="gallagher-social-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                        <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                        <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                        <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                    </svg>
+                                    Google
+                                </button>
+                                <button type="button" class="gallagher-social-btn">
+                                    <svg width="20" height="20" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                    </svg>
+                                    Apple
+                                </button>
+                            </div>
+                            
+                            <div class="gallagher-divider">
+                                <span>Or continue with email</span>
+                            </div>
+                            
+                            <div class="gallagher-form-row">
+                                <div class="gallagher-form-group">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                                </div>
+                                <div class="gallagher-form-group">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                                </div>
+                            </div>
+                            
+                            <div class="gallagher-form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            </div>
+                            
+                            <div class="gallagher-form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                            </div>
+                            
+                            <div class="gallagher-form-group">
+                                <label for="birthDate">Birth Date</label>
+                                <input type="date" id="birthDate" name="birthDate">
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: Art Preferences -->
+                        <div class="gallagher-form-step gallagher-hidden" id="gallagher-step-2">
+                            <div class="gallagher-form-group">
+                                <label for="experience">Art Experience Level *</label>
+                                <select id="experience" name="experience" required>
+                                    <option value="">Select your experience level</option>
+                                    <option value="beginner">Complete Beginner</option>
+                                    <option value="some">Some Experience</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced</option>
+                                    <option value="professional">Professional</option>
+                                </select>
+                            </div>
+                            
+                            <div class="gallagher-form-group">
+                                <label>Areas of Interest (select all that apply)</label>
+                                <div class="gallagher-checkbox-grid">
+                                    <div class="gallagher-checkbox-item">
+                                        <input type="checkbox" id="interest-drawing" name="interests" value="Drawing">
+                                        <label for="interest-drawing">Drawing</label>
+                                    </div>
+                                    <div class="gallagher-checkbox-item">
+                                        <input type="checkbox" id="interest-painting" name="interests" value="Painting">
+                                        <label for="interest-painting">Painting</label>
+                                    </div>
+                                    <div class="gallagher-checkbox-item">
+                                        <input type="checkbox" id="interest-digital" name="interests" value="Digital Art">
+                                        <label for="interest-digital">Digital Art</label>
+                                    </div>
+                                    <div class="gallagher-checkbox-item">
+                                        <input type="checkbox" id="interest-sculpture" name="interests" value="Sculpture">
+                                        <label for="interest-sculpture">Sculpture</label>
+                                    </div>
+                                    <div class="gallagher-checkbox-item">
+                                        <input type="checkbox" id="interest-photography" name="interests" value="Photography">
+                                        <label for="interest-photography">Photography</label>
+                                    </div>
+                                    <div class="gallagher-checkbox-item">
+                                        <input type="checkbox" id="interest-printmaking" name="interests" value="Printmaking">
+                                        <label for="interest-printmaking">Printmaking</label>
+                                    </div>
+                                    <div class="gallagher-checkbox-item">
+                                        <input type="checkbox" id="interest-mixed" name="interests" value="Mixed Media">
+                                        <label for="interest-mixed">Mixed Media</label>
+                                    </div>
+                                    <div class="gallagher-checkbox-item">
+                                        <input type="checkbox" id="interest-ceramics" name="interests" value="Ceramics">
+                                        <label for="interest-ceramics">Ceramics</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Account Creation -->
+                        <div class="gallagher-form-step gallagher-hidden" id="gallagher-step-3">
+                            <div class="gallagher-form-group">
+                                <label for="password">Password *</label>
+                                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                                <small>Must be at least 6 characters long</small>
+                            </div>
+                            
+                            <div class="gallagher-form-group">
+                                <label for="confirmPassword">Confirm Password *</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
+                            </div>
+                            
+                            <div class="gallagher-checkbox-item">
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <label for="newsletter">I'd like to receive updates about new classes and events</label>
+                            </div>
+                            
+                            <div class="gallagher-terms">
+                                <small>By creating an account, you agree to our Terms of Service and Privacy Policy.</small>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="gallagher-form-navigation">
+                            <button type="button" class="gallagher-btn gallagher-btn-secondary" id="gallagher-prev-btn" disabled>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15,18 9,12 15,6"/>
+                                </svg>
+                                Back
+                            </button>
+                            <button type="button" class="gallagher-btn gallagher-btn-primary" id="gallagher-next-btn">
+                                Next
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9,18 15,12 9,6"/>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <div class="gallagher-form-footer">
+                            Already have an account? <a href="#">Sign in</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple form navigation functionality
+        let currentStep = 0;
+        const steps = ['gallagher-step-1', 'gallagher-step-2', 'gallagher-step-3'];
+        const stepDescriptions = ['Tell us about yourself', 'What interests you?', 'Set up your login'];
+
+        function updateStep() {
+            // Update step indicators
+            document.querySelectorAll('.gallagher-step-indicator').forEach((indicator, index) => {
+                indicator.classList.remove('active', 'completed');
+                if (index === currentStep) {
+                    indicator.classList.add('active');
+                } else if (index < currentStep) {
+                    indicator.classList.add('completed');
+                }
+            });
+
+            // Update step connectors
+            document.querySelectorAll('.gallagher-step-connector').forEach((connector, index) => {
+                connector.classList.remove('completed');
+                if (index < currentStep) {
+                    connector.classList.add('completed');
+                }
+            });
+
+            // Update progress bar
+            const progress = ((currentStep + 1) / 3) * 100;
+            document.querySelector('.gallagher-progress-fill').style.width = progress + '%';
+
+            // Update step description
+            document.getElementById('gallagher-step-description').textContent = stepDescriptions[currentStep];
+
+            // Show/hide form steps
+            steps.forEach((stepId, index) => {
+                const stepEl = document.getElementById(stepId);
+                if (index === currentStep) {
+                    stepEl.classList.remove('gallagher-hidden');
+                } else {
+                    stepEl.classList.add('gallagher-hidden');
+                }
+            });
+
+            // Update navigation buttons
+            document.getElementById('gallagher-prev-btn').disabled = currentStep === 0;
+            
+            const nextBtn = document.getElementById('gallagher-next-btn');
+            if (currentStep === 2) {
+                nextBtn.innerHTML = 'Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>';
+            } else {
+                nextBtn.innerHTML = 'Next <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9,18 15,12 9,6"/></svg>';
+            }
+        }
+
+        // Event listeners
+        document.getElementById('gallagher-next-btn').addEventListener('click', () => {
+            if (currentStep < 2) {
+                currentStep++;
+                updateStep();
+            } else {
+                // Handle form submission
+                alert('Form submitted! (This is a demo)');
+            }
+        });
+
+        document.getElementById('gallagher-prev-btn').addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateStep();
+            }
+        });
+
+        // Initialize
+        updateStep();
+    </script>
+</body>
+</html>

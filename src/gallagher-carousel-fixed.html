@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallagher Art School - Expert MFA Yale Graduate Instruction</title>
+    <meta name="description" content="Join Gallagher Art School for expert art instruction from an MFA Yale graduate. Learn drawing, painting, sculpture, mixed media, and color theory.">
+    
+    <style>
+        /* Import Tailwind V4 CSS Variables */
+        :root {
+            --font-size: 14px;
+            --background: #ffffff;
+            --foreground: oklch(0.145 0 0);
+            --card: #ffffff;
+            --card-foreground: oklch(0.145 0 0);
+            --popover: oklch(1 0 0);
+            --popover-foreground: oklch(0.145 0 0);
+            --primary: #030213;
+            --primary-foreground: oklch(1 0 0);
+            --secondary: oklch(0.95 0.0058 264.53);
+            --secondary-foreground: #030213;
+            --muted: #ececf0;
+            --muted-foreground: #717182;
+            --accent: #e9ebef;
+            --accent-foreground: #030213;
+            --destructive: #d4183d;
+            --destructive-foreground: #ffffff;
+            --border: rgba(0, 0, 0, 0.1);
+            --input: transparent;
+            --input-background: #f3f3f5;
+            --switch-background: #cbced4;
+            --font-weight-medium: 500;
+            --font-weight-normal: 400;
+            --ring: oklch(0.708 0 0);
+            --chart-1: oklch(0.646 0.222 41.116);
+            --chart-2: oklch(0.6 0.118 184.704);
+            --chart-3: oklch(0.398 0.07 227.392);
+            --chart-4: oklch(0.828 0.189 84.429);
+            --chart-5: oklch(0.769 0.188 70.08);
+            --radius: 0.625rem;
+            --sidebar: oklch(0.985 0 0);
+            --sidebar-foreground: oklch(0.145 0 0);
+            --sidebar-primary: #030213;
+            --sidebar-primary-foreground: oklch(0.985 0 0);
+            --sidebar-accent: oklch(0.97 0 0);
+            --sidebar-accent-foreground: oklch(0.205 0 0);
+            --sidebar-border: oklch(0.922 0 0);
+            --sidebar-ring: oklch(0.708 0 0);
+            
+            /* Additional CSS Variables */
+            --color-background: var(--background);
+            --color-foreground: var(--foreground);
+            --color-card: var(--card);
+            --color-card-foreground: var(--card-foreground);
+            --color-popover: var(--popover);
+            --color-popover-foreground: var(--popover-foreground);
+            --color-primary: var(--primary);
+            --color-primary-foreground: var(--primary-foreground);
+            --color-secondary: var(--secondary);
+            --color-secondary-foreground: var(--secondary-foreground);
+            --color-muted: var(--muted);
+            --color-muted-foreground: var(--muted-foreground);
+            --color-accent: var(--accent);
+            --color-accent-foreground: var(--accent-foreground);
+            --color-destructive: var(--destructive);
+            --color-destructive-foreground: var(--destructive-foreground);
+            --color-border: var(--border);
+            --color-input: var(--input);
+            --color-input-background: var(--input-background);
+            --color-switch-background: var(--switch-background);
+            --color-ring: var(--ring);
+            --radius-sm: calc(var(--radius) - 4px);
+            --radius-md: calc(var(--radius) - 2px);
+            --radius-lg: var(--radius);
+            --radius-xl: calc(var(--radius) + 4px);
+        }
+
+        html {
+            font-size: var(--font-size);
+        }
+
+        body {
+            background: var(--color-background);
+            color: var(--color-foreground);
+            font-family: system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5;
+        }
+
+        * {
+            box-sizing: border-box;
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+        }
+
+        /* Base Typography */
+        h1 {
+            font-size: 1.875rem;
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+            margin: 0 0 0.5rem 0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+            margin: 0 0 0.5rem 0;
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+            margin: 0 0 0.5rem 0;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+            margin: 0 0 0.5rem 0;
+        }
+
+        p {
+            font-size: 1rem;
+            font-weight: var(--font-weight-normal);
+            line-height: 1.5;
+            margin: 0 0 1rem 0;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+            display: block;
+        }
+
+        button {
+            font-size: 1rem;
+            font-weight: var(--font-weight-medium);
+            line-height: 1.5;
+            cursor: pointer;
+            border: none;
+            background: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        input, textarea, select {
+            font-size: 1rem;
+            font-weight: var(--font-weight-normal);
+            line-height: 1.5;
+        }
+
+        /* Utility Classes */
+        .hidden { display: none !important; }
+        .block { display: block; }
+        .flex { display: flex; }
+        .grid { display: grid; }
+        .inline-flex { display: inline-flex; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+        .w-full { width: 100%; }
+        .h-full { height: 100%; }
+        .min-h-screen { min-height: 100vh; }
+        .max-w-md { max-width: 28rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .text-center { text-align: center; }
+        .items-center { align-items: center; }
+        .justify-center { justify-content: center; }
+        .justify-between { justify-content: space-between; }
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-4 { gap: 1rem; }
+        .space-y-2 > * + * { margin-top: 0.5rem; }
+        .space-y-3 > * + * { margin-top: 0.75rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-y-6 > * + * { margin-top: 1.5rem; }
+        .p-3 { padding: 0.75rem; }
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .p-8 { padding: 2rem; }
+        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+        .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
+        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+        .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+        .pb-6 { padding-bottom: 1.5rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-12 { margin-bottom: 3rem; }
+        .mr-2 { margin-right: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .rounded-lg { border-radius: var(--radius-lg); }
+        .rounded-full { border-radius: 9999px; }
+        .border { border-width: 1px; border-style: solid; }
+        .border-2 { border-width: 2px; border-style: solid; }
+        .border-gray-200 { border-color: #e5e7eb; }
+        .border-gray-300 { border-color: #d1d5db; }
+        .border-blue-500 { border-color: #3b82f6; }
+        .border-white\/20 { border-color: rgba(255, 255, 255, 0.2); }
+        .bg-white { background-color: #ffffff; }
+        .bg-white\/10 { background-color: rgba(255, 255, 255, 0.1); }
+        .bg-white\/20 { background-color: rgba(255, 255, 255, 0.2); }
+        .bg-white\/50 { background-color: rgba(255, 255, 255, 0.5); }
+        .bg-white\/75 { background-color: rgba(255, 255, 255, 0.75); }
+        .bg-white\/90 { background-color: rgba(255, 255, 255, 0.9); }
+        .bg-blue-50 { background-color: #eff6ff; }
+        .bg-blue-500 { background-color: #3b82f6; }
+        .bg-green-500 { background-color: #22c55e; }
+        .bg-gray-50 { background-color: #f9fafb; }
+        .bg-gray-100 { background-color: #f3f4f6; }
+        .bg-gray-200 { background-color: #e5e7eb; }
+        .bg-gray-400 { background-color: #9ca3af; }
+        .bg-black { background-color: #000000; }
+        .bg-black\/15 { background-color: rgba(0, 0, 0, 0.15); }
+        .bg-black\/50 { background-color: rgba(0, 0, 0, 0.5); }
+        .bg-purple-600 { background-color: #9333ea; }
+        .bg-purple-700 { background-color: #7c3aed; }
+        .bg-purple-900 { background-color: #581c87; }
+        .bg-blue-900 { background-color: #1e3a8a; }
+        .bg-indigo-900 { background-color: #312e81; }
+        .bg-red-500 { background-color: #ef4444; }
+        .text-white { color: #ffffff; }
+        .text-black { color: #000000; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-gray-500 { color: #6b7280; }
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-700 { color: #374151; }
+        .text-gray-900 { color: #111827; }
+        .text-blue-600 { color: #2563eb; }
+        .text-green-500 { color: #22c55e; }
+        .text-green-600 { color: #16a34a; }
+        .text-green-700 { color: #15803d; }
+        .text-red-600 { color: #dc2626; }
+        .text-sm { font-size: 0.875rem; }
+        .text-xs { font-size: 0.75rem; }
+        .text-lg { font-size: 1.125rem; }
+        .text-xl { font-size: 1.25rem; }
+        .text-2xl { font-size: 1.5rem; }
+        .text-3xl { font-size: 1.875rem; }
+        .text-4xl { font-size: 2.25rem; }
+        .text-5xl { font-size: 3rem; }
+        .font-medium { font-weight: var(--font-weight-medium); }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .opacity-50 { opacity: 0.5; }
+        .opacity-70 { opacity: 0.7; }
+        .opacity-80 { opacity: 0.8; }
+        .opacity-90 { opacity: 0.9; }
+        .cursor-pointer { cursor: pointer; }
+        .cursor-not-allowed { cursor: not-allowed; }
+        .select-none { user-select: none; }
+        .overflow-hidden { overflow: hidden; }
+        .object-cover { object-fit: cover; }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .drop-shadow-lg { filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1)); }
+        .drop-shadow-md { filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06)); }
+        .drop-shadow-sm { filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.05)); }
+        .backdrop-blur-sm { backdrop-filter: blur(4px); }
+        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .transition-colors { transition-property: color, background-color, border-color, text-decoration-color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .transition-opacity { transition-property: opacity; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+        .duration-200 { transition-duration: 200ms; }
+        .duration-300 { transition-duration: 300ms; }
+        .duration-500 { transition-duration: 500ms; }
+        .ease-linear { transition-timing-function: linear; }
+        .transform { transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y)); }
+        .translate-x-1\/2 { --tw-translate-x: 50%; }
+        .-translate-x-1\/2 { --tw-translate-x: -50%; }
+        .translate-y-1\/2 { --tw-translate-y: 50%; }
+        .-translate-y-1\/2 { --tw-translate-y: -50%; }
+        .scale-105 { --tw-scale-x: 1.05; --tw-scale-y: 1.05; }
+        .scale-110 { --tw-scale-x: 1.1; --tw-scale-y: 1.1; }
+        .z-10 { z-index: 10; }
+        .z-20 { z-index: 20; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0; }
+        .flex-shrink-0 { flex-shrink: 0; }
+        .flex-1 { flex: 1 1 0%; }
+        .appearance-none { appearance: none; }
+        .animate-spin { animation: spin 1s linear infinite; }
+        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            50% { opacity: .5; }
+        }
+
+        /* Background Gradients */
+        .bg-gradient-to-br {
+            background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
+        }
+
+        .from-gray-50 { --tw-gradient-from: #f9fafb; --tw-gradient-to: rgb(249 250 251 / 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+        .via-white { --tw-gradient-to: rgb(255 255 255 / 0); --tw-gradient-stops: var(--tw-gradient-from), #ffffff, var(--tw-gradient-to); }
+        .to-gray-100\/80 { --tw-gradient-to: rgb(243 244 246 / 0.8); }
+        .from-purple-900 { --tw-gradient-from: #581c87; --tw-gradient-to: rgb(88 28 135 / 0); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to); }
+        .via-blue-900 { --tw-gradient-to: rgb(30 58 138 / 0); --tw-gradient-stops: var(--tw-gradient-from), #1e3a8a, var(--tw-gradient-to); }
+        .to-indigo-900 { --tw-gradient-to: #312e81; }
+
+        /* Component Styles */
+        .card {
+            background-color: var(--color-card);
+            color: var(--color-card-foreground);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .card-header {
+            padding: 1.5rem 1.5rem 0;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-weight: 600;
+            line-height: 1.25;
+            margin: 0;
+        }
+
+        .card-description {
+            font-size: 0.875rem;
+            color: var(--color-muted-foreground);
+            margin: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-medium);
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn:disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-primary-foreground);
+            padding: 0.5rem 1rem;
+            height: 2.5rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary:hover {
+            background-color: rgb(3 2 19 / 0.9);
+        }
+
+        .btn-outline {
+            border: 1px solid var(--color-input);
+            background-color: var(--color-background);
+            padding: 0.5rem 1rem;
+            height: 2.5rem;
+            font-size: 0.875rem;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--color-accent);
+            color: var(--color-accent-foreground);
+        }
+
+        .btn-icon {
+            height: 2.5rem;
+            width: 2.5rem;
+            padding: 0;
+        }
+
+        .btn-sm {
+            height: 2.25rem;
+            border-radius: calc(var(--radius) - 2px);
+            padding-left: 0.75rem;
+            padding-right: 0.75rem;
+            font-size: 0.875rem;
+        }
+
+        .input {
+            display: flex;
+            height: 2.5rem;
+            width: 100%;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-input);
+            background-color: var(--color-input-background);
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+
+        .input:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            border-color: var(--color-ring);
+            box-shadow: 0 0 0 2px var(--color-ring);
+        }
+
+        .input:disabled {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .label {
+            font-size: 0.875rem;
+            font-weight: var(--font-weight-medium);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress {
+            position: relative;
+            height: 1rem;
+            width: 100%;
+            overflow: hidden;
+            border-radius: var(--radius-lg);
+            background-color: var(--color-secondary);
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            flex: 1 1 0%;
+            background-color: var(--color-primary);
+            transition: all 0.3s ease-in-out;
+            border-radius: var(--radius-lg);
+        }
+
+        .alert {
+            position: relative;
+            width: 100%;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            padding: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .alert-destructive {
+            border-color: var(--color-destructive);
+            color: var(--color-destructive);
+            background-color: rgb(239 68 68 / 0.1);
+        }
+
+        .separator {
+            height: 1px;
+            width: 100%;
+            background-color: var(--color-border);
+        }
+
+        .switch {
+            position: relative;
+            display: inline-flex;
+            height: 1.5rem;
+            width: 2.75rem;
+            cursor: pointer;
+            border-radius: 9999px;
+            border: 2px solid transparent;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 200ms;
+            background-color: var(--color-switch-background);
+        }
+
+        .switch:focus {
+            outline: 2px solid transparent;
+            outline-offset: 2px;
+            box-shadow: 0 0 0 2px var(--color-ring);
+        }
+
+        .switch.checked {
+            background-color: var(--color-primary);
+        }
+
+        .switch-thumb {
+            pointer-events: none;
+            display: block;
+            height: 1.25rem;
+            width: 1.25rem;
+            border-radius: 9999px;
+            background-color: var(--color-background);
+            box-shadow: 0 2px 2px 0 rgb(0 0 0 / 0.2);
+            transition-property: transform;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 100ms;
+            transform: translateX(0);
+        }
+
+        .switch.checked .switch-thumb {
+            transform: translateX(1.25rem);
+        }
+
+        /* Responsive Grid */
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+        /* Responsive Classes */
+        @media (min-width: 768px) {
+            .md\:flex { display: flex !important; }
+            .md\:hidden { display: none !important; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        @media (min-width: 1024px) {
+            .lg\:text-xl { font-size: 1.25rem; }
+            .lg\:text-2xl { font-size: 1.5rem; }
+            .lg\:text-5xl { font-size: 3rem; }
+            .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        /* Custom Carousel Styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            background: linear-gradient(135deg, #581c87, #1e3a8a, #312e81);
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            transform: translateX(100%);
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .carousel-slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Layout Styles */
+        .desktop-layout {
+            display: none;
+        }
+
+        .mobile-layout {
+            display: block;
+        }
+
+        @media (min-width: 768px) {
+            .desktop-layout {
+                display: flex;
+            }
+            .mobile-layout {
+                display: none;
+            }
+            .desktop-left {
+                width: 50%;
+                height: 100vh;
+            }
+            .desktop-right {
+                width: 50%;
+                height: 100vh;
+                background: linear-gradient(135deg, #f9fafb, #ffffff, rgba(243, 244, 246, 0.8));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 1.5rem;
+                position: relative;
+            }
+            .mobile-form-section {
+                min-height: 60vh;
+            }
+            .mobile-carousel-section {
+                height: 16rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- DESKTOP/WEB VERSION: Side by side layout -->
+    <div class="desktop-layout min-h-screen">
+        <!-- LEFT: Carousel -->
+        <div class="desktop-left">
+            <div id="desktopCarousel" class="carousel-container"></div>
+        </div>
+        
+        <!-- RIGHT: Form -->
+        <div class="desktop-right">
+            <!-- Form Container -->
+            <div class="w-full max-w-md">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-2xl">Gallagher Art School</h1>
+                        <p class="card-description">Expert instruction from an MFA Yale graduate</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="space-y-4">
+                            <h2>Sign Up for Classes</h2>
+                            <p>Join our comprehensive art instruction program taught by a Yale MFA graduate.</p>
+                            <button class="btn btn-primary w-full">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MOBILE VERSION: Stacked layout -->
+    <div class="mobile-layout min-h-screen">
+        <!-- TOP: Form section -->
+        <div class="mobile-form-section bg-gradient-to-br from-gray-50 via-white to-gray-100/80 flex items-center justify-center p-6 relative">
+            <!-- Form Container -->
+            <div class="w-full max-w-md">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="card-title text-2xl">Gallagher Art School</h1>
+                        <p class="card-description">Expert instruction from an MFA Yale graduate</p>
+                    </div>
+                    <div class="card-content">
+                        <div class="space-y-4">
+                            <h2>Sign Up for Classes</h2>
+                            <p>Join our comprehensive art instruction program taught by a Yale MFA graduate.</p>
+                            <button class="btn btn-primary w-full">Get Started</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- BOTTOM: Carousel section -->
+        <div class="mobile-carousel-section">
+            <div id="mobileCarousel" class="carousel-container"></div>
+        </div>
+    </div>
+
+    <script>
+        // Global Application State
+        class GallagherApp {
+            constructor() {
+                this.currentSlide = 0;
+                this.isPlaying = true;
+                this.autoPlayInterval = 4000;
+                this.imagesLoaded = false;
+                this.slides = [
+                    {
+                        image: "https://gallagherartschool.com/wp-content/uploads/2025/08/PAINTING-ONE.png",
+                        title: "Master the Art of Drawing",
+                        subtitle: "From beginner sketches to advanced techniques"
+                    },
+                    {
+                        image: "https://gallagherartschool.com/wp-content/uploads/2025/08/underhisvery-copy.jpeg",
+                        title: "Explore Vibrant Painting",
+                        subtitle: "Watercolors, oils, and mixed media"
+                    },
+                    {
+                        image: "https://gallagherartschool.com/wp-content/uploads/2025/08/Palette.webp",
+                        title: "Color Theory Mastery",
+                        subtitle: "Understanding color relationships and harmony"
+                    },
+                    {
+                        image: "https://gallagherartschool.com/wp-content/uploads/2023/06/Sculpture011.webp",
+                        title: "Sculpture & 3D Art",
+                        subtitle: "Shape your imagination into reality"
+                    },
+                    {
+                        image: "https://gallagherartschool.com/wp-content/uploads/2023/06/Frank-Stella-sm.webp",
+                        title: "Mixed Media AI & Collage",
+                        subtitle: "Combine traditional and AI-generated materials"
+                    }
+                ];
+                
+                this.init();
+            }
+
+            init() {
+                this.initializeCarousels();
+            }
+
+            // Carousel functionality
+            initializeCarousels() {
+                this.preloadImages();
+                this.renderCarousel('desktopCarousel');
+                this.renderCarousel('mobileCarousel');
+                this.startAutoPlay();
+            }
+
+            preloadImages() {
+                const loadPromises = this.slides.slice(0, 3).map(slide => {
+                    return new Promise((resolve, reject) => {
+                        const img = new Image();
+                        img.onload = resolve;
+                        img.onerror = reject;
+                        img.src = slide.image;
+                    });
+                });
+
+                Promise.allSettled(loadPromises).then(() => {
+                    this.imagesLoaded = true;
+                    this.renderCarousel('desktopCarousel');
+                    this.renderCarousel('mobileCarousel');
+                }).catch(() => {
+                    this.imagesLoaded = true; // Continue anyway
+                    this.renderCarousel('desktopCarousel');
+                    this.renderCarousel('mobileCarousel');
+                });
+            }
+
+            renderCarousel(containerId) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+
+                if (!this.imagesLoaded) {
+                    container.innerHTML = `
+                        <div class="flex items-center justify-center h-full">
+                            <div class="text-white text-center">
+                                <div class="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+                                <p class="text-lg opacity-90">Loading Art Gallery...</p>
+                            </div>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const slidesHtml = this.slides.map((slide, index) => `
+                    <div class="carousel-slide ${index === this.currentSlide ? 'active' : ''}" data-slide="${index}">
+                        <img src="${slide.image}" alt="${slide.title}" />
+                        <div class="absolute inset-0 bg-black/15"></div>
+                    </div>
+                `).join('');
+
+                container.innerHTML = `
+                    ${slidesHtml}
+                    
+                    <!-- Navigation Controls -->
+                    <button class="btn btn-outline btn-icon absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-200 z-20"
+                            onclick="app.goToPrev()" aria-label="Previous slide" title="Previous slide" style="pointer-events: auto;">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+
+                    <button class="btn btn-outline btn-icon absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20 transition-all duration-200 z-20"
+                            onclick="app.goToNext()" aria-label="Next slide" title="Next slide" style="pointer-events: auto;">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+
+                    <!-- Content Overlay -->
+                    <div class="absolute inset-0 flex flex-col justify-center items-center text-center p-8 text-white z-10 pointer-events-none">
+                        <div class="space-y-4">
+                            <h1 class="text-3xl lg:text-5xl font-bold mb-2 drop-shadow-lg">
+                                Gallagher Art School
+                            </h1>
+                            <p class="text-lg lg:text-xl opacity-90 mb-6 drop-shadow-md">
+                                Expert instruction from an MFA Yale graduate
+                            </p>
+                            <div class="space-y-4">
+                                <h2 class="text-xl lg:text-2xl font-semibold drop-shadow-md">
+                                    ${this.slides[this.currentSlide].title}
+                                </h2>
+                                <p class="text-base lg:text-lg opacity-80 mb-4 drop-shadow-sm">
+                                    ${this.slides[this.currentSlide].subtitle}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Slide Indicators -->
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 pointer-events-auto" style="z-index: 20;">
+                            ${this.slides.map((_, index) => `
+                                <button onclick="app.goToSlide(${index})"
+                                        class="w-3 h-3 rounded-full transition-all duration-300 ${index === this.currentSlide ? 'bg-white scale-110 shadow-lg' : 'bg-white/50 hover:bg-white/75 hover:scale-105'}"
+                                        aria-label="Go to slide ${index + 1}: ${this.slides[index].title}"
+                                        title="${this.slides[index].title} (${index + 1})"
+                                        style="pointer-events: auto;">
+                                </button>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            goToNext() {
+                this.currentSlide = (this.currentSlide + 1) % this.slides.length;
+                this.renderCarousel('desktopCarousel');
+                this.renderCarousel('mobileCarousel');
+            }
+
+            goToPrev() {
+                this.currentSlide = (this.currentSlide - 1 + this.slides.length) % this.slides.length;
+                this.renderCarousel('desktopCarousel');
+                this.renderCarousel('mobileCarousel');
+            }
+
+            goToSlide(index) {
+                this.currentSlide = index;
+                this.renderCarousel('desktopCarousel');
+                this.renderCarousel('mobileCarousel');
+            }
+
+            startAutoPlay() {
+                if (this.autoPlayTimer) {
+                    clearInterval(this.autoPlayTimer);
+                }
+                
+                this.autoPlayTimer = setInterval(() => {
+                    if (this.isPlaying && this.imagesLoaded) {
+                        this.goToNext();
+                    }
+                }, this.autoPlayInterval);
+            }
+
+            togglePlayPause() {
+                this.isPlaying = !this.isPlaying;
+                if (this.isPlaying) {
+                    this.startAutoPlay();
+                } else {
+                    clearInterval(this.autoPlayTimer);
+                }
+            }
+        }
+
+        // Initialize the app
+        const app = new GallagherApp();
+        
+        // Expose app to global scope for button onclick handlers
+        window.app = app;
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (event) => {
+            switch (event.key) {
+                case 'ArrowLeft':
+                    event.preventDefault();
+                    app.goToPrev();
+                    break;
+                case 'ArrowRight':
+                    event.preventDefault();
+                    app.goToNext();
+                    break;
+                case ' ':
+                    event.preventDefault();
+                    app.togglePlayPause();
+                    break;
+            }
+        });
+    </script>
+</body>
+</html>

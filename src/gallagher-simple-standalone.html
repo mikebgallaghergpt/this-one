@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallagher Art School - Sign Up</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .carousel-slide {
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.5s ease-in-out;
+        }
+        
+        .form-container {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .step-indicator {
+            transition: all 0.3s ease;
+        }
+        
+        .step-indicator.active {
+            background-color: #3B82F6;
+            color: white;
+        }
+        
+        .step-indicator.completed {
+            background-color: #10B981;
+            color: white;
+        }
+        
+        .interest-checkbox:checked + label {
+            background-color: #EBF4FF;
+            border-color: #3B82F6;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Desktop Layout -->
+    <div class="hidden lg:flex min-h-screen">
+        <!-- Left Panel: Carousel -->
+        <div class="w-1/2 relative overflow-hidden">
+            <div id="carousel" class="w-full h-full relative">
+                <!-- Slides will be inserted here by JavaScript -->
+            </div>
+            
+            <!-- Carousel Content Overlay -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-8 z-10 bg-black bg-opacity-50">
+                <h1 class="text-5xl font-bold mb-4">Gallagher Art School</h1>
+                <p class="text-xl mb-8 opacity-90">Expert instruction from an MFA Yale graduate</p>
+                <div class="space-y-2">
+                    <h2 id="slide-title" class="text-2xl font-semibold">Master the Art of Drawing</h2>
+                    <p id="slide-description" class="text-lg opacity-80">From beginner sketches to advanced techniques</p>
+                </div>
+            </div>
+            
+            <!-- Carousel Indicators -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+                <!-- Indicators will be inserted here -->
+            </div>
+        </div>
+        
+        <!-- Right Panel: Form -->
+        <div class="w-1/2 bg-gray-50 flex items-center justify-center p-8">
+            <div class="w-full max-w-md">
+                <div id="signup-form" class="form-container bg-white rounded-xl p-8">
+                    <!-- Form content will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Layout -->
+    <div class="lg:hidden min-h-screen flex flex-col">
+        <!-- Top: Form -->
+        <div class="flex-1 bg-gray-50 flex items-center justify-center p-6">
+            <div class="w-full max-w-md">
+                <div id="mobile-signup-form" class="form-container bg-white rounded-xl p-6">
+                    <!-- Form content will be inserted here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Bottom: Carousel -->
+        <div class="h-64 relative overflow-hidden">
+            <div id="mobile-carousel" class="w-full h-full relative">
+                <!-- Slides will be inserted here -->
+            </div>
+            
+            <!-- Mobile Carousel Overlay -->
+            <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4 z-10 bg-black bg-opacity-50">
+                <h1 class="text-2xl font-bold mb-2">Gallagher Art School</h1>
+                <p class="text-sm mb-4 opacity-90">Expert instruction from an MFA Yale graduate</p>
+                <div class="space-y-1">
+                    <h2 id="mobile-slide-title" class="text-lg font-semibold">Master the Art of Drawing</h2>
+                    <p id="mobile-slide-description" class="text-sm opacity-80">From beginner sketches to advanced techniques</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Art Class Images and Data
+        const slides = [
+            {
+                image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                title: 'Master the Art of Drawing',
+                description: 'From beginner sketches to advanced techniques'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                title: 'Explore Vibrant Painting',
+                description: 'Watercolors, oils, and mixed media'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                title: 'Digital Art & Design',
+                description: 'Modern techniques for the digital age'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1452457807411-4979b707c5be?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                title: 'Sculpture & 3D Art',
+                description: 'Shape your imagination into reality'
+            },
+            {
+                image: 'https://images.unsplash.com/photo-1590736969955-71cc94901144?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
+                title: 'Pottery & Ceramics',
+                description: 'Work with clay and create functional art'
+            }
+        ];
+
+        let currentSlide = 0;
+        let currentStep = 'personal';
+        
+        // Form data storage
+        let formData = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            experience: '',
+            interests: [],
+            hearAboutUs: '',
+            hearAboutUsOther: '',
+            password: '',
+            confirmPassword: '',
+            newsletter: false
+        };
+
+        // Initialize carousel
+        function initCarousel() {
+            const carousel = document.getElementById('carousel');
+            const mobileCarousel = document.getElementById('mobile-carousel');
+            
+            // Create slides for both desktop and mobile
+            [carousel, mobileCarousel].forEach(container => {
+                if (!container) return;
+                
+                container.innerHTML = slides.map((slide, index) => `
+                    <div class="carousel-slide absolute inset-0 ${index === 0 ? 'opacity-100' : 'opacity-0'}"
+                         style="background-image: linear-gradient(rgba(59, 130, 246, 0.7), rgba(147, 51, 234, 0.7)), url('${slide.image}')">
+                    </div>
+                `).join('');
+            });
+            
+            // Create indicators (desktop only)
+            const indicatorsContainer = document.querySelector('.absolute.bottom-8');
+            if (indicatorsContainer) {
+                indicatorsContainer.innerHTML = slides.map((_, index) => `
+                    <button onclick="goToSlide(${index})" 
+                            class="w-3 h-3 rounded-full transition-all ${index === 0 ? 'bg-white scale-110' : 'bg-white/50'}" 
+                            id="indicator-${index}">
+                    </button>
+                `).join('');
+            }
+            
+            // Start auto-advance
+            setInterval(nextSlide, 4000);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const slide = slides[currentSlide];
+            
+            // Update slide content
+            document.getElementById('slide-title').textContent = slide.title;
+            document.getElementById('slide-description').textContent = slide.description;
+            
+            if (document.getElementById('mobile-slide-title')) {
+                document.getElementById('mobile-slide-title').textContent = slide.title;
+                document.getElementById('mobile-slide-description').textContent = slide.description;
+            }
+            
+            // Update slide visibility
+            document.querySelectorAll('.carousel-slide').forEach((slideEl, index) => {
+                slideEl.classList.toggle('opacity-100', index === currentSlide);
+                slideEl.classList.toggle('opacity-0', index !== currentSlide);
+            });
+            
+            // Update indicators
+            slides.forEach((_, index) => {
+                const indicator = document.getElementById(`indicator-${index}`);
+                if (indicator) {
+                    indicator.className = `w-3 h-3 rounded-full transition-all ${
+                        index === currentSlide ? 'bg-white scale-110' : 'bg-white/50'
+                    }`;
+                }
+            });
+        }
+
+        // Form Management
+        function renderForm() {
+            const formHtml = `
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-4">
+                        ${['personal', 'preferences', 'account'].map((step, index) => `
+                            <div class="flex items-center">
+                                <div class="step-indicator w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
+                                           ${getStepClass(step)}">
+                                    ${index + 1}
+                                </div>
+                                ${index < 2 ? '<div class="w-16 h-1 bg-gray-200 mx-2"></div>' : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="text-center">
+                        <h2 class="text-xl font-bold text-gray-900">${getStepTitle()}</h2>
+                        <p class="text-sm text-gray-600">${getStepDescription()}</p>
+                    </div>
+                </div>
+
+                <!-- Form Content -->
+                <div class="fade-in">
+                    ${getStepContent()}
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex gap-3 mt-6">
+                    ${currentStep !== 'personal' ? `
+                        <button onclick="previousStep()" 
+                                class="flex-1 px-4 py-3 text-gray-600 bg-gray-100 rounded-lg font-medium hover:bg-gray-200 transition-colors">
+                            Previous
+                        </button>
+                    ` : ''}
+                    <button onclick="${currentStep === 'account' ? 'submitForm()' : 'nextStep()'}'" 
+                            class="flex-1 px-4 py-3 text-white bg-blue-600 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                        ${currentStep === 'account' ? 'Create Account' : 'Next'}
+                    </button>
+                </div>
+
+                <!-- Social Login Options -->
+                ${currentStep === 'personal' ? `
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <p class="text-center text-sm text-gray-500 mb-4">Or continue with</p>
+                        <div class="grid grid-cols-2 gap-3">
+                            <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                                <svg class="w-5 h-5 mr-2" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                                Google
+                            </button>
+                            <button class="flex items-center justify-center px-4 py-3 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 2C5.58 2 2 5.58 2 10c0 4.42 3.58 8 8 8s8-3.58 8-8c0-4.42-3.58-8-8-8zm3.5 6L10 10.5 6.5 8 10 5.5 13.5 8z"/>
+                                </svg>
+                                Apple
+                            </button>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+
+            // Update both desktop and mobile forms
+            document.getElementById('signup-form').innerHTML = formHtml;
+            if (document.getElementById('mobile-signup-form')) {
+                document.getElementById('mobile-signup-form').innerHTML = formHtml;
+            }
+        }
+
+        function getStepClass(step) {
+            const steps = ['personal', 'preferences', 'account'];
+            const currentIndex = steps.indexOf(currentStep);
+            const stepIndex = steps.indexOf(step);
+            
+            if (stepIndex < currentIndex) return 'completed';
+            if (stepIndex === currentIndex) return 'active';
+            return 'bg-gray-200 text-gray-500';
+        }
+
+        function getStepTitle() {
+            switch (currentStep) {
+                case 'personal': return 'Personal Information';
+                case 'preferences': return 'Art Preferences';
+                case 'account': return 'Create Account';
+                default: return '';
+            }
+        }
+
+        function getStepDescription() {
+            switch (currentStep) {
+                case 'personal': return 'Tell us about yourself';
+                case 'preferences': return 'What interests you?';
+                case 'account': return 'Set up your login';
+                default: return '';
+            }
+        }
+
+        function getStepContent() {
+            switch (currentStep) {
+                case 'personal':
+                    return `
+                        <div class="space-y-4">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                                    <input type="text" value="${formData.firstName}" 
+                                           onchange="updateFormData('firstName', this.value)"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                           placeholder="John" required>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                                    <input type="text" value="${formData.lastName}" 
+                                           onchange="updateFormData('lastName', this.value)"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                           placeholder="Doe" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" value="${formData.email}" 
+                                       onchange="updateFormData('email', this.value)"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="john@example.com" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Phone (Optional)</label>
+                                <input type="tel" value="${formData.phone}" 
+                                       onchange="updateFormData('phone', this.value)"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                       placeholder="(555) 123-4567">
+                            </div>
+                        </div>
+                    `;
+                    
+                case 'preferences':
+                    return `
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Experience Level</label>
+                                <select onchange="updateFormData('experience', this.value)" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Select your level</option>
+                                    <option value="beginner" ${formData.experience === 'beginner' ? 'selected' : ''}>Complete Beginner</option>
+                                    <option value="some" ${formData.experience === 'some' ? 'selected' : ''}>Some Experience</option>
+                                    <option value="intermediate" ${formData.experience === 'intermediate' ? 'selected' : ''}>Intermediate</option>
+                                    <option value="advanced" ${formData.experience === 'advanced' ? 'selected' : ''}>Advanced</option>
+                                    <option value="professional" ${formData.experience === 'professional' ? 'selected' : ''}>Professional</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-4">Art Interests (Select all that apply)</label>
+                                <div class="grid grid-cols-2 gap-2">
+                                    ${['Drawing', 'Painting', 'Digital Art', 'Sculpture', 'Pottery', 'Photography', 'Printmaking', 'Textile Art', 'Jewelry Making', 'Mixed Media', 'Color Theory', 'Art History'].map(interest => `
+                                        <label class="flex items-center space-x-2 p-2 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50">
+                                            <input type="checkbox" ${formData.interests.includes(interest) ? 'checked' : ''}
+                                                   onchange="toggleInterest('${interest}')"
+                                                   class="interest-checkbox sr-only">
+                                            <div class="w-4 h-4 border-2 border-gray-300 rounded flex items-center justify-center ${formData.interests.includes(interest) ? 'bg-blue-500 border-blue-500' : ''}">
+                                                ${formData.interests.includes(interest) ? '<svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg>' : ''}
+                                            </div>
+                                            <span class="text-sm text-gray-700">${interest}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                case 'account':
+                    return `
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">How did you hear about us?</label>
+                                <select onchange="updateFormData('hearAboutUs', this.value)" 
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Please select</option>
+                                    <option value="google" ${formData.hearAboutUs === 'google' ? 'selected' : ''}>Google Search</option>
+                                    <option value="facebook" ${formData.hearAboutUs === 'facebook' ? 'selected' : ''}>Facebook</option>
+                                    <option value="instagram" ${formData.hearAboutUs === 'instagram' ? 'selected' : ''}>Instagram</option>
+                                    <option value="friend" ${formData.hearAboutUs === 'friend' ? 'selected' : ''}>Friend/Family</option>
+                                    <option value="flyer" ${formData.hearAboutUs === 'flyer' ? 'selected' : ''}>Flyer/Advertisement</option>
+                                    <option value="other" ${formData.hearAboutUs === 'other' ? 'selected' : ''}>Other</option>
+                                </select>
+                            </div>
+                            ${formData.hearAboutUs === 'other' ? `
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Please specify</label>
+                                    <input type="text" value="${formData.hearAboutUsOther}" 
+                                           onchange="updateFormData('hearAboutUsOther', this.value)"
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                           placeholder="Tell us how you found us" required>
+                                </div>
+                            ` : ''}
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                <input type="password" value="${formData.password}" 
+                                       onchange="updateFormData('password', this.value)"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                       placeholder="Choose a secure password" required minlength="6">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                                <input type="password" value="${formData.confirmPassword}" 
+                                       onchange="updateFormData('confirmPassword', this.value)"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                       placeholder="Confirm your password" required>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <input type="checkbox" id="newsletter" ${formData.newsletter ? 'checked' : ''}
+                                       onchange="updateFormData('newsletter', this.checked)"
+                                       class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500">
+                                <label for="newsletter" class="text-sm text-gray-700">
+                                    Subscribe to our newsletter for class updates and art tips
+                                </label>
+                            </div>
+                        </div>
+                    `;
+                    
+                default:
+                    return '';
+            }
+        }
+
+        function updateFormData(field, value) {
+            formData[field] = value;
+            if (field === 'hearAboutUs') {
+                renderForm(); // Re-render to show/hide "other" field
+            }
+        }
+
+        function toggleInterest(interest) {
+            if (formData.interests.includes(interest)) {
+                formData.interests = formData.interests.filter(i => i !== interest);
+            } else {
+                formData.interests.push(interest);
+            }
+            renderForm();
+        }
+
+        function nextStep() {
+            if (validateCurrentStep()) {
+                const steps = ['personal', 'preferences', 'account'];
+                const currentIndex = steps.indexOf(currentStep);
+                if (currentIndex < steps.length - 1) {
+                    currentStep = steps[currentIndex + 1];
+                    renderForm();
+                }
+            }
+        }
+
+        function previousStep() {
+            const steps = ['personal', 'preferences', 'account'];
+            const currentIndex = steps.indexOf(currentStep);
+            if (currentIndex > 0) {
+                currentStep = steps[currentIndex - 1];
+                renderForm();
+            }
+        }
+
+        function validateCurrentStep() {
+            switch (currentStep) {
+                case 'personal':
+                    if (!formData.firstName.trim()) {
+                        alert('First name is required');
+                        return false;
+                    }
+                    if (!formData.lastName.trim()) {
+                        alert('Last name is required');
+                        return false;
+                    }
+                    if (!formData.email.trim()) {
+                        alert('Email is required');
+                        return false;
+                    }
+                    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+                        alert('Please enter a valid email address');
+                        return false;
+                    }
+                    break;
+                    
+                case 'preferences':
+                    if (!formData.experience) {
+                        alert('Please select your experience level');
+                        return false;
+                    }
+                    break;
+                    
+                case 'account':
+                    if (!formData.hearAboutUs) {
+                        alert('Please select how you heard about us');
+                        return false;
+                    }
+                    if (formData.hearAboutUs === 'other' && !formData.hearAboutUsOther.trim()) {
+                        alert('Please specify how you heard about us');
+                        return false;
+                    }
+                    if (!formData.password) {
+                        alert('Password is required');
+                        return false;
+                    }
+                    if (formData.password.length < 6) {
+                        alert('Password must be at least 6 characters long');
+                        return false;
+                    }
+                    if (formData.password !== formData.confirmPassword) {
+                        alert('Passwords do not match');
+                        return false;
+                    }
+                    break;
+            }
+            return true;
+        }
+
+        function submitForm() {
+            if (validateCurrentStep()) {
+                // Store in localStorage for demo
+                localStorage.setItem('gallagherSignup', JSON.stringify({
+                    ...formData,
+                    submittedAt: new Date().toISOString()
+                }));
+                
+                // Show success message
+                const successHtml = `
+                    <div class="text-center py-8">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                        </div>
+                        <h2 class="text-2xl font-bold text-green-700 mb-2">Welcome to Gallagher Art School!</h2>
+                        <p class="text-gray-600 mb-4">Your account has been created successfully.</p>
+                        <p class="text-sm text-gray-500">We'll be in touch soon with class schedules and more information.</p>
+                        <button onclick="resetForm()" 
+                                class="mt-6 px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                            Sign Up Another Student
+                        </button>
+                    </div>
+                `;
+                
+                document.getElementById('signup-form').innerHTML = successHtml;
+                if (document.getElementById('mobile-signup-form')) {
+                    document.getElementById('mobile-signup-form').innerHTML = successHtml;
+                }
+            }
+        }
+
+        function resetForm() {
+            currentStep = 'personal';
+            formData = {
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                experience: '',
+                interests: [],
+                hearAboutUs: '',
+                hearAboutUsOther: '',
+                password: '',
+                confirmPassword: '',
+                newsletter: false
+            };
+            renderForm();
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initCarousel();
+            renderForm();
+        });
+    </script>
+</body>
+</html>

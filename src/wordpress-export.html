@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallagher Art School - Sign Up</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .signup-container {
+            min-height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(59, 130, 246, 0.85), rgba(67, 56, 202, 0.9));
+        }
+
+        .main-content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .carousel-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 300px;
+        }
+
+        .carousel-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 600px;
+        }
+
+        .carousel-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .carousel-content .subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .carousel-content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .carousel-content p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        .carousel-indicators {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: white;
+        }
+
+        .form-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .signup-form {
+            width: 100%;
+            max-width: 400px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .step-indicators {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: nowrap;
+        }
+
+        .step-indicator {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            min-height: 56px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            color: #6b7280;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .step-indicator.active {
+            background: #000000;
+            color: white;
+        }
+
+        .step-indicator.completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .step-connector {
+            width: 48px;
+            height: 2px;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .step-connector.completed {
+            background: #10b981;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-header p {
+            color: #6b7280;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #3b82f6;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #374151;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .social-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            height: 48px;
+        }
+
+        .social-btn.google {
+            background: white;
+            border: 1px solid #d1d5db;
+            color: #374151;
+        }
+
+        .social-btn.google:hover {
+            background: #f9fafb;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .social-btn.apple {
+            background: #000000;
+            border: none;
+            color: white;
+        }
+
+        .social-btn.apple:hover {
+            background: #1a1a1a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .social-btn:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 1rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563eb;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+        }
+
+        .btn-secondary:hover {
+            background: #f9fafb;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .form-footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .carousel-panel {
+                min-height: 250px;
+            }
+            
+            .carousel-content h1 {
+                font-size: 2rem;
+            }
+            
+            .form-panel {
+                padding: 1rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .social-buttons {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+            
+            .step-indicators {
+                gap: 0.5rem;
+            }
+            
+            .step-indicator {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                min-height: 48px;
+            }
+            
+            .step-indicator svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .step-connector {
+                width: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="background-image"></div>
+        <div class="background-overlay"></div>
+        
+        <div class="main-content">
+            <!-- Left Panel - Carousel -->
+            <div class="carousel-panel">
+                <div class="carousel-content" id="carousel-content">
+                    <h1>Gallagher Art School</h1>
+                    <p class="subtitle">Expert instruction from an MFA Yale graduate</p>
+                    <h2 id="carousel-title">Master the Art of Drawing</h2>
+                    <p id="carousel-subtitle">From beginner sketches to advanced techniques</p>
+                </div>
+                
+                <div class="carousel-indicators">
+                    <div class="indicator active" data-slide="0"></div>
+                    <div class="indicator" data-slide="1"></div>
+                    <div class="indicator" data-slide="2"></div>
+                    <div class="indicator" data-slide="3"></div>
+                    <div class="indicator" data-slide="4"></div>
+                    <div class="indicator" data-slide="5"></div>
+                    <div class="indicator" data-slide="6"></div>
+                </div>
+            </div>
+            
+            <!-- Right Panel - Signup Form -->
+            <div class="form-panel">
+                <div class="signup-form">
+                    <!-- Step Indicators -->
+                    <div class="step-indicators">
+                        <div class="step-indicator active" data-step="0">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step-indicator" data-step="1">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                                <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                                <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                                <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+                            </svg>
+                        </div>
+                        <div class="step-connector"></div>
+                        <div class="step-indicator" data-step="2">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="form-header">
+                        <h3>Join Gallagher Art School</h3>
+                        <p id="step-description">Tell us about yourself</p>
+                    </div>
+                    
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill" style="width: 33%"></div>
+                    </div>
+                    
+                    <form id="signup-form">
+                        <!-- Step 1: Personal Info -->
+                        <div class="form-step" id="step-1">
+                            <!-- Social Login -->
+                            <div class="social-buttons">
+                                <!-- Google Sign-In Button -->
+                                <a href="#" class="social-btn google" onclick="handleSocialLogin('google')">
+                                    <svg width="20" height="20" viewBox="0 0 24 24">
+                                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                    </svg>
+                                    <span>Continue with Google</span>
+                                </a>
+                                
+                                <!-- Apple Sign-In Button -->
+                                <a href="#" class="social-btn apple" onclick="handleSocialLogin('apple')">
+                                    <svg width="20" height="20" viewBox="0 0 24 24">
+                                        <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                    </svg>
+                                    <span>Continue with Apple</span>
+                                </a>
+                            </div>
+                            
+                            <div class="divider">
+                                <span>Or continue with email</span>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">First Name</label>
+                                    <input type="text" id="firstName" name="firstName" placeholder="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="lastName">Last Name</label>
+                                    <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2: Art Preferences -->
+                        <div class="form-step hidden" id="step-2">
+                            <div class="form-group">
+                                <label for="experience">Art Experience Level</label>
+                                <select id="experience" name="experience" required>
+                                    <option value="">Select your experience level</option>
+                                    <option value="beginner">Complete Beginner</option>
+                                    <option value="some">Some Experience</option>
+                                    <option value="intermediate">Intermediate</option>
+                                    <option value="advanced">Advanced</option>
+                                    <option value="professional">Professional</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Areas of Interest (select all that apply)</label>
+                                <div class="checkbox-group">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="drawing" name="interests" value="drawing">
+                                        <label for="drawing">Drawing</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="painting" name="interests" value="painting">
+                                        <label for="painting">Painting</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="digital" name="interests" value="digital">
+                                        <label for="digital">Digital Art</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="sculpture" name="interests" value="sculpture">
+                                        <label for="sculpture">Sculpture</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="photography" name="interests" value="photography">
+                                        <label for="photography">Photography</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="printmaking" name="interests" value="printmaking">
+                                        <label for="printmaking">Printmaking</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="mixed" name="interests" value="mixed">
+                                        <label for="mixed">Mixed Media</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="ceramics" name="interests" value="ceramics">
+                                        <label for="ceramics">Ceramics</label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="hearAboutUs">How did you hear about us? *</label>
+                                <select id="hearAboutUs" name="hearAboutUs" required onchange="handleHearAboutUsChange(this.value)">
+                                    <option value="">Select how you heard about us</option>
+                                    <option value="google">Google / Online Search</option>
+                                    <option value="social">Social Media (Instagram, Facebook, TikTok)</option>
+                                    <option value="flyer">Flyer / Postcard</option>
+                                    <option value="school">School / Teacher Referral</option>
+                                    <option value="friend">Friend or Family Referral</option>
+                                    <option value="event">Community Event / Local Fair</option>
+                                    <option value="gallery">Gallery / Museum Connection</option>
+                                    <option value="returning">Returning Student</option>
+                                    <option value="other">Other (please specify)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group hidden" id="hearAboutUsOther-group">
+                                <label for="hearAboutUsOther">Please specify *</label>
+                                <input type="text" id="hearAboutUsOther" name="hearAboutUsOther" placeholder="Tell us how you heard about us">
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3: Account Creation -->
+                        <div class="form-step hidden" id="step-3">
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" id="newsletter" name="newsletter">
+                                    <label for="newsletter">I'd like to receive updates about new classes and events</label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <p style="font-size: 0.75rem; color: #6b7280;">
+                                    By creating an account, you agree to our Terms of Service and Privacy Policy.
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation -->
+                        <div class="form-navigation">
+                            <button type="button" class="btn btn-secondary" id="prev-btn" disabled>
+                                ← Back
+                            </button>
+                            <button type="button" class="btn btn-primary" id="next-btn">
+                                Next →
+                            </button>
+                        </div>
+                        
+                        <div class="form-footer">
+                            Already have an account? <a href="#">Sign in</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Carousel functionality
+        const slides = [
+            {
+                title: "Master the Art of Drawing",
+                subtitle: "From beginner sketches to advanced techniques"
+            },
+            {
+                title: "Explore Vibrant Painting",
+                subtitle: "Watercolors, oils, and mixed media"
+            },
+            {
+                title: "Digital Art & Design",
+                subtitle: "Modern techniques for the digital age"
+            },
+            {
+                title: "Sculpture & 3D Art",
+                subtitle: "Shape your imagination into reality"
+            },
+            {
+                title: "Photography Fundamentals",
+                subtitle: "Capture the world through your lens"
+            },
+            {
+                title: "Mixed Media Mastery",
+                subtitle: "Combine techniques for unique creations"
+            },
+            {
+                title: "Ceramics & Pottery",
+                subtitle: "Mold clay into beautiful forms"
+            }
+        ];
+
+        let currentSlide = 0;
+        let currentStep = 0;
+        const totalSteps = 3;
+
+        // Auto-advance carousel
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % slides.length;
+            updateCarousel();
+        }, 4000);
+
+        function updateCarousel() {
+            document.getElementById('carousel-title').textContent = slides[currentSlide].title;
+            document.getElementById('carousel-subtitle').textContent = slides[currentSlide].subtitle;
+            
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Carousel indicator clicks
+        document.querySelectorAll('.indicator').forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentSlide = index;
+                updateCarousel();
+            });
+        });
+
+        // Form step navigation
+        const stepDescriptions = [
+            "Tell us about yourself",
+            "What interests you?",
+            "Set up your login"
+        ];
+
+        function updateStep() {
+            // Update step indicators
+            document.querySelectorAll('.step-indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentStep);
+                indicator.classList.toggle('completed', index < currentStep);
+            });
+
+            // Update connectors
+            document.querySelectorAll('.step-connector').forEach((connector, index) => {
+                connector.classList.toggle('completed', index < currentStep);
+            });
+
+            // Update progress bar
+            const progress = ((currentStep + 1) / totalSteps) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+
+            // Update step description
+            document.getElementById('step-description').textContent = stepDescriptions[currentStep];
+
+            // Show/hide form steps
+            document.querySelectorAll('.form-step').forEach((step, index) => {
+                step.classList.toggle('hidden', index !== currentStep);
+            });
+
+            // Update navigation buttons
+            document.getElementById('prev-btn').disabled = currentStep === 0;
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.textContent = currentStep === totalSteps - 1 ? 'Create Account' : 'Next →';
+        }
+
+        // Navigation button events
+        document.getElementById('prev-btn').addEventListener('click', () => {
+            if (currentStep > 0) {
+                currentStep--;
+                updateStep();
+            }
+        });
+
+        document.getElementById('next-btn').addEventListener('click', () => {
+            if (currentStep < totalSteps - 1) {
+                currentStep++;
+                updateStep();
+            } else {
+                // Submit form
+                handleFormSubmit();
+            }
+        });
+
+        function handleSocialLogin(provider) {
+            // Show info message about setup requirements
+            alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login requires additional setup in your Supabase dashboard. Please visit https://supabase.com/docs/guides/auth/social-login/auth-${provider} for setup instructions.`);
+            
+            // In a real implementation, this would redirect to the OAuth provider
+            // window.location.href = `/auth/${provider}`;
+        }
+
+        function handleHearAboutUsChange(value) {
+            const otherGroup = document.getElementById('hearAboutUsOther-group');
+            const otherInput = document.getElementById('hearAboutUsOther');
+            
+            if (value === 'other') {
+                otherGroup.classList.remove('hidden');
+                otherInput.required = true;
+            } else {
+                otherGroup.classList.add('hidden');
+                otherInput.required = false;
+                otherInput.value = '';
+            }
+        }
+
+        function handleFormSubmit() {
+            const formData = new FormData(document.getElementById('signup-form'));
+            const interests = [];
+            document.querySelectorAll('input[name="interests"]:checked').forEach(checkbox => {
+                interests.push(checkbox.value);
+            });
+
+            // You can customize this to send data to your WordPress backend
+            console.log('Form submitted with data:', {
+                firstName: formData.get('firstName'),
+                lastName: formData.get('lastName'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                experience: formData.get('experience'),
+                interests: interests,
+                hearAboutUs: formData.get('hearAboutUs'),
+                hearAboutUsOther: formData.get('hearAboutUsOther'),
+                newsletter: formData.get('newsletter')
+            });
+
+            alert('Account created successfully! Welcome to Gallagher Art School!');
+        }
+
+        // Initialize
+        updateStep();
+        updateCarousel();
+    </script>
+</body>
+</html>

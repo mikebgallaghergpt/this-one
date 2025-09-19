@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flatsome Plugin Test</title>
+    <link rel="stylesheet" href="flatsome-integration/assets/gallagher-styles.css">
+    <style>
+        /* Simulate some Flatsome theme conflicts */
+        .fl-builder-content * {
+            box-sizing: content-box;
+        }
+        
+        .ux-section .gallagher-step-indicator {
+            /* This might cause oval distortion */
+            transform: scale(1.2, 0.8);
+        }
+    </style>
+</head>
+<body class="fl-builder-content">
+    <div class="ux-section">
+        <div class="gallagher-signup-container">
+            <div class="gallagher-main-content">
+                <!-- Left Panel - Enhanced Image Carousel -->
+                <div class="gallagher-carousel-panel">
+                    <div class="gallagher-carousel-content">
+                        <h1>Gallagher Art School</h1>
+                        <p class="gallagher-subtitle">Expert instruction from an MFA Yale graduate</p>
+                        <div class="gallagher-slide-content">
+                            <h2>Master the Art of Drawing</h2>
+                            <p>From beginner sketches to advanced techniques</p>
+                            <button class="gallagher-slide-cta">Start Drawing</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Panel - Signup Form -->
+                <div class="gallagher-form-panel">
+                    <div class="gallagher-signup-form">
+                        <!-- Step Indicators -->
+                        <div class="gallagher-step-indicators">
+                            <div class="gallagher-step-indicator active">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                            <div class="gallagher-step-connector"></div>
+                            <div class="gallagher-step-indicator">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="13.5" cy="6.5" r=".5"/>
+                                    <circle cx="17.5" cy="10.5" r=".5"/>
+                                    <circle cx="8.5" cy="7.5" r=".5"/>
+                                    <circle cx="6.5" cy="12.5" r=".5"/>
+                                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+                                </svg>
+                            </div>
+                            <div class="gallagher-step-connector"></div>
+                            <div class="gallagher-step-indicator">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <div class="gallagher-form-header">
+                            <h3>Join Gallagher Art School</h3>
+                            <p>Tell us about yourself</p>
+                        </div>
+                        
+                        <div class="gallagher-form-group">
+                            <label for="experience">Art Experience Level *</label>
+                            <select id="experience" name="experience" required>
+                                <option value="">Select your experience level</option>
+                                <option value="beginner">Complete Beginner</option>
+                                <option value="some">Some Experience</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                                <option value="professional">Professional</option>
+                            </select>
+                        </div>
+                        
+                        <div class="gallagher-form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" placeholder="test@example.com">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

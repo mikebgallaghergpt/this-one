@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Gallagher Art School - Expert MFA Yale Graduate Instruction</title>
+    <meta name="description" content="Join Gallagher Art School for expert art instruction from an MFA Yale graduate. Learn drawing, painting, digital AI art, sculpture, mixed media, and color theory.">
+    
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Brand Colors from your globals.css */
+            --primary: #030213;
+            --secondary: #f0f0f5;
+            --muted: #ececf0;
+            --accent: #e9ebef;
+            --background: #ffffff;
+            --foreground: #1a1a1a;
+            --border: rgba(0, 0, 0, 0.1);
+            --input-background: #f3f3f5;
+            --destructive: #d4183d;
+            
+            /* Gradient colors */
+            --gradient-start: #fafafb;
+            --gradient-mid: #f8f8fa;
+            --gradient-end: #f5f5f7;
+            
+            --font-size: 14px;
+            --radius: 10px;
+        }
+
+        html {
+            font-size: var(--font-size);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--foreground);
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-mid) 50%, var(--gradient-end) 100%);
+            min-height: 100vh;
+        }
+
+        /* Layout Styles */
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .desktop-layout {
+            display: none;
+        }
+
+        .mobile-layout {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        @media (min-width: 1024px) {
+            .desktop-layout {
+                display: flex;
+                flex-direction: row;
+                min-height: 100vh;
+            }
+            .mobile-layout {
+                display: none;
+            }
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            background: linear-gradient(135deg, #4c1d95 0%, #1e40af 50%, #3730a3 100%);
+            overflow: hidden;
+            flex: 1;
+            min-height: 400px;
+        }
+
+        .desktop-layout .carousel-container {
+            width: 50%;
+            height: 100vh;
+        }
+
+        .mobile-layout .carousel-container {
+            height: 250px;
+            order: 2;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .carousel-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        .carousel-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .carousel-content .subtitle {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .carousel-content .slide-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .carousel-content .slide-description {
+            font-size: 1rem;
+            opacity: 0.8;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            margin-bottom: 1.5rem;
+        }
+
+        .carousel-cta {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.9);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            text-shadow: none;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .carousel-cta:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .carousel-content h1 {
+                font-size: 2rem;
+            }
+            .carousel-content .subtitle {
+                font-size: 1rem;
+            }
+            .carousel-content .slide-title {
+                font-size: 1.25rem;
+            }
+        }
+
+        /* Carousel Controls */
+        .carousel-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: white;
+            transform: scale(1.2);
+        }
+
+        /* Form Container Styles */
+        .form-container {
+            background: linear-gradient(135deg, #fafafb 0%, #f8f8fa 50%, #f5f5f7 100%);
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .desktop-layout .form-container {
+            width: 50%;
+            min-height: 100vh;
+        }
+
+        .mobile-layout .form-container {
+            min-height: 60vh;
+            order: 1;
+        }
+
+        /* Admin Button */
+        .admin-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            color: var(--foreground);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            z-index: 20;
+        }
+
+        .admin-button:hover {
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Form Card Styles */
+        .form-card {
+            width: 100%;
+            max-width: 28rem;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            overflow: hidden;
+        }
+
+        /* Form Header */
+        .form-header {
+            padding: 2rem 2rem 1.5rem;
+            text-align: center;
+            background: white;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--foreground);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-description {
+            color: #6b7280;
+            font-size: 0.875rem;
+        }
+
+        /* Progress Icons */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem 0;
+            gap: 1rem;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .progress-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .progress-icon.inactive {
+            background: #e5e7eb;
+            color: #9ca3af;
+        }
+
+        .progress-icon.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .progress-icon.completed {
+            background: #10b981;
+            color: white;
+        }
+
+        .progress-line {
+            width: 3rem;
+            height: 2px;
+            background: #e5e7eb;
+            transition: all 0.3s ease;
+        }
+
+        .progress-line.completed {
+            background: #10b981;
+        }
+
+        /* Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background: #e5e7eb;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        /* Form Content */
+        .form-content {
+            padding: 0 2rem 2rem;
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 1rem;
+            border-radius: var(--radius);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .alert.error {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: #dc2626;
+        }
+
+        .alert.success {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: #16a34a;
+        }
+
+        /* Social Login */
+        .social-login {
+            margin-bottom: 1.5rem;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            width: 100%;
+            height: 3rem;
+            border: 1px solid #d1d5db;
+            border-radius: var(--radius);
+            background: white;
+            color: #374151;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .social-button:hover {
+            background: #f9fafb;
+            border-color: #9ca3af;
+        }
+
+        .social-button.apple {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .social-button.apple:hover {
+            background: #1a1a2e;
+        }
+
+        .divider {
+            position: relative;
+            text-align: center;
+            margin: 1.5rem 0;
+        }
+
+        .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e5e7eb;
+        }
+
+        .divider span {
+            background: white;
+            padding: 0 1rem;
+            color: #6b7280;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Form Fields */
+        .form-step {
+            opacity: 0;
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .form-step.active {
+            opacity: 1;
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--foreground);
+            font-size: 0.875rem;
+        }
+
+        .form-input {
+            width: 100%;
+            height: 2.5rem;
+            padding: 0 0.75rem;
+            background: var(--input-background);
+            border: 1px solid #d1d5db;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(3, 2, 19, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            height: 3rem;
+            padding: 0 2.5rem 0 1rem;
+            background: white;
+            border: 2px solid #d1d5db;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            appearance: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1rem;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(3, 2, 19, 0.1);
+        }
+
+        /* Checkbox Styles */
+        .checkbox-group {
+            display: grid;
+            gap: 0.5rem;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            border: 2px solid #e5e7eb;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item:hover {
+            border-color: #d1d5db;
+        }
+
+        .checkbox-item.checked {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .checkbox-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #d1d5db;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .checkbox-item.checked .checkbox-icon {
+            background: #3b82f6;
+            border-color: #3b82f6;
+        }
+
+        .checkbox-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--foreground);
+        }
+
+        /* Navigation Buttons */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: var(--radius);
+            background: white;
+            color: var(--foreground);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background: #f9fafb;
+        }
+
+        .nav-button.primary {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .nav-button.primary:hover {
+            background: #1a1a2e;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-spacer {
+            flex: 1;
+        }
+
+        /* Success State */
+        .success-container {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .success-icon {
+            width: 4rem;
+            height: 4rem;
+            margin: 0 auto 1rem;
+            color: #10b981;
+        }
+
+        .success-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+        }
+
+        .success-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Mobile Optimizations */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 1rem;
+            }
+            
+            .form-card {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .form-header,
+            .form-content {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .progress-icon {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+            
+            .progress-line {
+                width: 2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hide form steps initially */
+        .form-step:not(.active) {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Desktop Layout -->
+        <div class="desktop-layout">
+            <!-- Left: Carousel -->
+            <div class="carousel-container" id="carousel">
+                <div class="carousel-overlay"></div>
+                
+                <div class="carousel-content">
+                    <h1>Gallagher Art School</h1>
+                    <p class="subtitle">Expert instruction from an MFA Yale graduate</p>
+                    <div id="carousel-text">
+                        <h3 class="slide-title">Master the Art of Drawing</h3>
+                        <p class="slide-description">From beginner sketches to advanced techniques</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls" id="carousel-dots"></div>
+                
+                <!-- Carousel slides will be populated by JavaScript -->
+            </div>
+            
+            <!-- Right: Form -->
+            <div class="form-container">
+                <a href="#admin" class="admin-button" onclick="toggleAdmin()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    Admin
+                </a>
+                
+                <div class="form-card" id="signupForm">
+                    <!-- Form content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Layout -->
+        <div class="mobile-layout">
+            <!-- Top: Form -->
+            <div class="form-container">
+                <a href="#admin" class="admin-button" onclick="toggleAdmin()">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                    <span style="display: none;">Admin</span>
+                </a>
+                
+                <div class="form-card" id="signupFormMobile">
+                    <!-- Form content will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Bottom: Carousel -->
+            <div class="carousel-container" id="carouselMobile">
+                <div class="carousel-overlay"></div>
+                
+                <div class="carousel-content">
+                    <h1>Gallagher Art School</h1>
+                    <p class="subtitle">Expert instruction from an MFA Yale graduate</p>
+                    <div id="carousel-text-mobile">
+                        <h3 class="slide-title">Master the Art of Drawing</h3>
+                        <p class="slide-description">From beginner sketches to advanced techniques</p>
+                    </div>
+                </div>
+                
+                <div class="carousel-controls" id="carousel-dots-mobile"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Carousel data
+        const carouselSlides = [
+            {
+                image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Master the Art of Drawing",
+                description: "From beginner sketches to advanced techniques",
+                ctaText: "Explore Drawing Classes",
+                ctaLink: "#drawing-classes",
+                classes: [
+                    { name: "Beginner Drawing Fundamentals", link: "#drawing-beginner" },
+                    { name: "Advanced Portraiture", link: "#drawing-portrait" },
+                    { name: "Figure Drawing Workshop", link: "#drawing-figure" },
+                    { name: "Charcoal & Graphite Mastery", link: "#drawing-charcoal" }
+                ]
+            },
+            {
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Explore Vibrant Painting",
+                description: "Watercolors, oils, and mixed media",
+                ctaText: "Browse Painting Classes",
+                ctaLink: "#painting-classes",
+                classes: [
+                    { name: "Watercolor Basics", link: "#painting-watercolor" },
+                    { name: "Oil Painting Techniques", link: "#painting-oil" },
+                    { name: "Acrylic Landscape Painting", link: "#painting-landscape" },
+                    { name: "Abstract Expressionism", link: "#painting-abstract" }
+                ]
+            },
+            {
+                image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Digital AI Art & Design",
+                description: "Modern techniques for the digital age",
+                ctaText: "Join Digital Classes",
+                ctaLink: "#digital-classes",
+                classes: [
+                    { name: "AI Art Generation", link: "#digital-ai" },
+                    { name: "Digital Illustration", link: "#digital-illustration" },
+                    { name: "Photo Manipulation", link: "#digital-photo" },
+                    { name: "3D Digital Sculpting", link: "#digital-3d" }
+                ]
+            },
+            {
+                image: "https://images.unsplash.com/photo-1452457807411-4979b707c5be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+                title: "Sculpture & 3D Art",
+                description: "Shape your imagination into reality",
+                ctaText: "View Sculpture Classes",
+                ctaLink: "#sculpture-classes",
+                classes: [
+                    { name: "Clay Modeling Basics", link: "#sculpture-clay" },
+                    { name: "Stone Carving Workshop", link: "#sculpture-stone" },
+                    { name: "Metal Sculpture", link: "#sculpture-metal" },
+                    { name: "Contemporary Installation", link: "#sculpture-installation" }
+                ]
+            },
+            {
+                image: "https://images.unsplash.com/photo-1696937059409-60900a43bc67?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHhjb2xsYWdlJTIwYXJ0JTIwbWl4ZWQlMjBtZWRpYXxlbnwxfHx8fDE3NTc5NzcyOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+                title: "Mixed Media AI & Collage",
+                description: "Combine traditional and AI-generated materials",
+                ctaText: "Discover Mixed Media",
+                ctaLink: "#mixed-media-classes",
+                classes: [
+                    { name: "AI-Enhanced Collage", link: "#mixed-ai-collage" },
+                    { name: "Traditional Collage Techniques", link: "#mixed-traditional" },
+                    { name: "Texture & Material Exploration", link: "#mixed-texture" },
+                    { name: "Digital-Physical Fusion", link: "#mixed-fusion" }
+                ]
+            },
+            {
+                image: "https://images.unsplash.com/photo-1692291051778-014c9b193830?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhcnQlMjBzdHVkaW8lMjBjcmVhdGl2ZSUyMHNwYWNlfGVufDF8fHx8MTc1NzUzMzcyNXww&ixlib=rb-4.1.0&q=80&w=1080",
+                title: "Color Theory Mastery",
+                description: "Understanding color relationships and harmony",
+                ctaText: "Learn Color Theory",
+                ctaLink: "#color-theory-classes",
+                classes: [
+                    { name: "Color Fundamentals", link: "#color-fundamentals" },
+                    { name: "Advanced Color Harmony", link: "#color-harmony" },
+                    { name: "Color Psychology in Art", link: "#color-psychology" },
+                    { name: "Digital Color Grading", link: "#color-digital" }
+                ]
+            }
+        ];
+
+        // Form state
+        let currentStep = 1;
+        let isLoading = false;
+        let formData = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            experience: '',
+            interests: [],
+            hearAboutUs: '',
+            hearAboutUsOther: '',
+            password: '',
+            confirmPassword: '',
+            newsletter: false
+        };
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCarousel();
+            renderForm();
+            
+            // Start carousel autoplay
+            setInterval(nextSlide, 4000);
+        });
+
+        // Carousel functionality
+        let currentSlideIndex = 0;
+
+        function initializeCarousel() {
+            const carousels = ['carousel', 'carouselMobile'];
+            
+            carousels.forEach(carouselId => {
+                const carousel = document.getElementById(carouselId);
+                if (!carousel) return;
+                
+                // Create slides
+                carouselSlides.forEach((slide, index) => {
+                    const slideElement = document.createElement('div');
+                    slideElement.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+                    slideElement.innerHTML = `<img src="${slide.image}" alt="${slide.title}" loading="lazy">`;
+                    carousel.appendChild(slideElement);
+                });
+                
+                // Create dots
+                const dotsContainer = document.getElementById(carouselId === 'carousel' ? 'carousel-dots' : 'carousel-dots-mobile');
+                if (dotsContainer) {
+                    carouselSlides.forEach((_, index) => {
+                        const dot = document.createElement('div');
+                        dot.className = `carousel-dot ${index === 0 ? 'active' : ''}`;
+                        dot.onclick = () => goToSlide(index);
+                        dotsContainer.appendChild(dot);
+                    });
+                }
+            });
+            
+            updateCarouselText();
+        }
+
+        function goToSlide(index) {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const dots = document.querySelectorAll('.carousel-dot');
+            
+            // Remove active class from current
+            slides[currentSlideIndex]?.classList.remove('active');
+            dots[currentSlideIndex]?.classList.remove('active');
+            
+            // Add active class to new
+            currentSlideIndex = index;
+            slides[currentSlideIndex]?.classList.add('active');
+            dots[currentSlideIndex]?.classList.add('active');
+            
+            updateCarouselText();
+        }
+
+        function nextSlide() {
+            const nextIndex = (currentSlideIndex + 1) % carouselSlides.length;
+            goToSlide(nextIndex);
+        }
+
+        function updateCarouselText() {
+            const slide = carouselSlides[currentSlideIndex];
+            const textContainers = ['carousel-text', 'carousel-text-mobile'];
+            
+            textContainers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = `
+                        <h3 class="slide-title">${slide.title}</h3>
+                        <p class="slide-description">${slide.description}</p>
+                        <a href="${slide.ctaLink}" class="carousel-cta" onclick="handleClassLink('${slide.ctaLink}', event)">
+                            ${slide.ctaText}
+                        </a>
+                    `;
+                }
+            });
+        }
+
+        // Handle class link clicks
+        function handleClassLink(link, event) {
+            event.preventDefault();
+            const slide = carouselSlides[currentSlideIndex];
+            
+            // Create a modal or alert showing available classes
+            let classesHtml = `
+                <div style="max-width: 500px; padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary); font-size: 1.25rem;">${slide.title}</h3>
+                    <p style="margin-bottom: 1.5rem; color: #666;">${slide.description}</p>
+                    <div style="margin-bottom: 1.5rem;">
+                        <h4 style="margin-bottom: 0.75rem; font-size: 1rem; color: var(--primary);">Available Classes:</h4>
+                        <ul style="list-style: none; padding: 0;">
+            `;
+            
+            slide.classes.forEach(classItem => {
+                classesHtml += `
+                    <li style="margin-bottom: 0.5rem;">
+                        <a href="${classItem.link}" 
+                           style="color: #3b82f6; text-decoration: none; font-weight: 500; display: block; padding: 0.5rem; border-radius: 6px; transition: background 0.2s;"
+                           onmouseover="this.style.background='#f8fafc'"
+                           onmouseout="this.style.background='transparent'"
+                           onclick="alert('This would navigate to: ${classItem.name}'); return false;">
+                            ${classItem.name}
+                        </a>
+                    </li>
+                `;
+            });
+            
+            classesHtml += `
+                        </ul>
+                    </div>
+                    <div style="text-align: center;">
+                        <button onclick="document.body.removeChild(this.closest('.modal-overlay'))" 
+                                style="padding: 0.5rem 1.5rem; background: var(--primary); color: white; border: none; border-radius: 6px; cursor: pointer;">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            // Create modal overlay
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'modal-overlay';
+            modalOverlay.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 1000;
+                padding: 1rem;
+            `;
+            modalOverlay.innerHTML = classesHtml;
+            
+            // Close modal when clicking overlay
+            modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                    document.body.removeChild(modalOverlay);
+                }
+            });
+            
+            document.body.appendChild(modalOverlay);
+        }
+
+        // Form rendering
+        function renderForm() {
+            const formContainers = ['signupForm', 'signupFormMobile'];
+            
+            formContainers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = getFormHTML();
+                }
+            });
+            
+            updateFormStep();
+        }
+
+        function getFormHTML() {
+            return `
+                <div class="form-header">
+                    <div class="progress-container">
+                        <div class="progress-step">
+                            <div class="progress-icon ${currentStep >= 1 ? (currentStep > 1 ? 'completed' : 'active') : 'inactive'}" id="step1-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                            </div>
+                            <div class="progress-line ${currentStep > 1 ? 'completed' : ''}"></div>
+                        </div>
+                        
+                        <div class="progress-step">
+                            <div class="progress-icon ${currentStep >= 2 ? (currentStep > 2 ? 'completed' : 'active') : 'inactive'}" id="step2-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                                    <path d="M9 16a5 5 0 1 0 6 0"></path>
+                                    <path d="M15 12a3 3 0 1 0-6 0"></path>
+                                </svg>
+                            </div>
+                            <div class="progress-line ${currentStep > 2 ? 'completed' : ''}"></div>
+                        </div>
+                        
+                        <div class="progress-step">
+                            <div class="progress-icon ${currentStep >= 3 ? 'active' : 'inactive'}" id="step3-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: ${(currentStep / 3) * 100}%"></div>
+                    </div>
+                    
+                    <h2 class="form-title">Join Gallagher Art School</h2>
+                    <p class="form-description">${getStepDescription()}</p>
+                </div>
+                
+                <div class="form-content">
+                    <div id="error-alert" class="alert error" style="display: none;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                        <span id="error-text"></span>
+                    </div>
+                    
+                    ${getStepContent()}
+                    
+                    <div class="form-navigation">
+                        ${currentStep > 1 ? `
+                            <button type="button" class="nav-button" onclick="previousStep()" ${isLoading ? 'disabled' : ''}>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15,18 9,12 15,6"></polyline>
+                                </svg>
+                                Previous
+                            </button>
+                        ` : '<div></div>'}
+                        
+                        <div class="nav-spacer"></div>
+                        
+                        ${currentStep < 3 ? `
+                            <button type="button" class="nav-button primary" onclick="nextStep()" ${isLoading ? 'disabled' : ''}>
+                                Next
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="9,18 15,12 9,6"></polyline>
+                                </svg>
+                            </button>
+                        ` : `
+                            <button type="button" class="nav-button primary" onclick="submitForm()" ${isLoading ? 'disabled' : ''}>
+                                ${isLoading ? '<div class="spinner"></div> Creating...' : 'Create Account'}
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        function getStepDescription() {
+            switch(currentStep) {
+                case 1: return 'Tell us about yourself';
+                case 2: return 'What interests you?';
+                case 3: return 'Set up your login';
+                default: return '';
+            }
+        }
+
+        function getStepContent() {
+            switch(currentStep) {
+                case 1: return getStep1Content();
+                case 2: return getStep2Content();
+                case 3: return getStep3Content();
+                default: return '';
+            }
+        }
+
+        function getStep1Content() {
+            return `
+                <div class="social-login">
+                    <div class="social-buttons">
+                        <button type="button" class="social-button" onclick="socialLogin('google')">
+                            <svg width="16" height="16" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                            Google
+                        </button>
+                        
+                        <button type="button" class="social-button apple" onclick="socialLogin('apple')">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                            </svg>
+                            Apple
+                        </button>
+                    </div>
+                    
+                    <div class="divider">
+                        <span>Or continue with email</span>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">First Name *</label>
+                        <input type="text" class="form-input" value="${formData.firstName}" 
+                               onchange="updateFormData('firstName', this.value)" placeholder="John" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Last Name *</label>
+                        <input type="text" class="form-input" value="${formData.lastName}" 
+                               onchange="updateFormData('lastName', this.value)" placeholder="Doe" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Email *</label>
+                    <input type="email" class="form-input" value="${formData.email}" 
+                           onchange="updateFormData('email', this.value)" placeholder="john@example.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <input type="tel" class="form-input" value="${formData.phone}" 
+                           onchange="updateFormData('phone', this.value)" placeholder="(555) 123-4567">
+                </div>
+            `;
+        }
+
+        function getStep2Content() {
+            const interests = ['Drawing', 'Painting', 'Digital AI Art', 'Sculpture', 'Mixed Media AI & Collage', 'Color Theory'];
+            
+            return `
+                <div class="form-group">
+                    <label class="form-label">Art Experience Level *</label>
+                    <select class="form-select" onchange="updateFormData('experience', this.value)" required>
+                        <option value="">Select your experience level</option>
+                        <option value="beginner" ${formData.experience === 'beginner' ? 'selected' : ''}>Complete Beginner</option>
+                        <option value="some" ${formData.experience === 'some' ? 'selected' : ''}>Some Experience</option>
+                        <option value="intermediate" ${formData.experience === 'intermediate' ? 'selected' : ''}>Intermediate</option>
+                        <option value="advanced" ${formData.experience === 'advanced' ? 'selected' : ''}>Advanced</option>
+                        <option value="professional" ${formData.experience === 'professional' ? 'selected' : ''}>Professional</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Areas of Interest (select all that apply)</label>
+                    <div class="checkbox-group">
+                        ${interests.map(interest => `
+                            <div class="checkbox-item ${formData.interests.includes(interest) ? 'checked' : ''}" 
+                                 onclick="toggleInterest('${interest}')">
+                                <div class="checkbox-icon">
+                                    ${formData.interests.includes(interest) ? `
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                                            <polyline points="20,6 9,17 4,12"></polyline>
+                                        </svg>
+                                    ` : ''}
+                                </div>
+                                <span class="checkbox-label">${interest}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        function getStep3Content() {
+            return `
+                <div class="form-group">
+                    <label class="form-label">How did you hear about us? *</label>
+                    <select class="form-select" onchange="updateFormData('hearAboutUs', this.value)" required>
+                        <option value="">Select how you heard about us</option>
+                        <option value="google" ${formData.hearAboutUs === 'google' ? 'selected' : ''}>Google Search</option>
+                        <option value="facebook" ${formData.hearAboutUs === 'facebook' ? 'selected' : ''}>Facebook</option>
+                        <option value="instagram" ${formData.hearAboutUs === 'instagram' ? 'selected' : ''}>Instagram</option>
+                        <option value="friend" ${formData.hearAboutUs === 'friend' ? 'selected' : ''}>Friend/Family</option>
+                        <option value="flyer" ${formData.hearAboutUs === 'flyer' ? 'selected' : ''}>Flyer/Advertisement</option>
+                        <option value="other" ${formData.hearAboutUs === 'other' ? 'selected' : ''}>Other</option>
+                    </select>
+                </div>
+                
+                ${formData.hearAboutUs === 'other' ? `
+                    <div class="form-group">
+                        <label class="form-label">Please specify</label>
+                        <input type="text" class="form-input" value="${formData.hearAboutUsOther}" 
+                               onchange="updateFormData('hearAboutUsOther', this.value)" placeholder="How did you hear about us?">
+                    </div>
+                ` : ''}
+                
+                <div class="form-group">
+                    <label class="form-label">Password *</label>
+                    <input type="password" class="form-input" value="${formData.password}" 
+                           onchange="updateFormData('password', this.value)" placeholder="Enter your password" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Confirm Password *</label>
+                    <input type="password" class="form-input" value="${formData.confirmPassword}" 
+                           onchange="updateFormData('confirmPassword', this.value)" placeholder="Confirm your password" required>
+                </div>
+                
+                <div class="form-group">
+                    <div class="checkbox-item ${formData.newsletter ? 'checked' : ''}" onclick="toggleNewsletter()">
+                        <div class="checkbox-icon">
+                            ${formData.newsletter ? `
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
+                                    <polyline points="20,6 9,17 4,12"></polyline>
+                                </svg>
+                            ` : ''}
+                        </div>
+                        <span class="checkbox-label">Subscribe to our newsletter for art tips and class updates</span>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Form functionality
+        function updateFormData(field, value) {
+            formData[field] = value;
+        }
+
+        function toggleInterest(interest) {
+            if (formData.interests.includes(interest)) {
+                formData.interests = formData.interests.filter(i => i !== interest);
+            } else {
+                formData.interests.push(interest);
+            }
+            renderForm();
+        }
+
+        function toggleNewsletter() {
+            formData.newsletter = !formData.newsletter;
+            renderForm();
+        }
+
+        function showError(message) {
+            const errorAlert = document.getElementById('error-alert');
+            const errorText = document.getElementById('error-text');
+            if (errorAlert && errorText) {
+                errorText.textContent = message;
+                errorAlert.style.display = 'flex';
+                errorAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+
+        function hideError() {
+            const errorAlert = document.getElementById('error-alert');
+            if (errorAlert) {
+                errorAlert.style.display = 'none';
+            }
+        }
+
+        function validateStep(step) {
+            hideError();
+            
+            switch(step) {
+                case 1:
+                    if (!formData.firstName.trim()) {
+                        showError('First name is required');
+                        return false;
+                    }
+                    if (!formData.lastName.trim()) {
+                        showError('Last name is required');
+                        return false;
+                    }
+                    if (!formData.email.trim()) {
+                        showError('Email is required');
+                        return false;
+                    }
+                    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+                        showError('Please enter a valid email address');
+                        return false;
+                    }
+                    return true;
+                    
+                case 2:
+                    if (!formData.experience) {
+                        showError('Please select your experience level');
+                        return false;
+                    }
+                    return true;
+                    
+                case 3:
+                    if (!formData.hearAboutUs) {
+                        showError('Please select how you heard about us');
+                        return false;
+                    }
+                    if (formData.hearAboutUs === 'other' && !formData.hearAboutUsOther.trim()) {
+                        showError('Please specify how you heard about us');
+                        return false;
+                    }
+                    if (!formData.password) {
+                        showError('Password is required');
+                        return false;
+                    }
+                    if (formData.password.length < 6) {
+                        showError('Password must be at least 6 characters long');
+                        return false;
+                    }
+                    if (formData.password !== formData.confirmPassword) {
+                        showError('Passwords do not match');
+                        return false;
+                    }
+                    return true;
+                    
+                default:
+                    return true;
+            }
+        }
+
+        function nextStep() {
+            if (!validateStep(currentStep)) return;
+            
+            if (currentStep < 3) {
+                currentStep++;
+                renderForm();
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                renderForm();
+            }
+        }
+
+        function updateFormStep() {
+            // This function is called after rendering to update any dynamic content
+            // Currently handled in renderForm(), but kept for extensibility
+        }
+
+        function socialLogin(provider) {
+            alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login requires additional setup. Please contact support for social login configuration.`);
+        }
+
+        function submitForm() {
+            if (!validateStep(3)) return;
+            
+            isLoading = true;
+            renderForm();
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Save to localStorage (demo mode)
+                const userData = {
+                    ...formData,
+                    id: 'demo_' + Date.now(),
+                    createdAt: new Date().toISOString(),
+                    demoMode: true
+                };
+                
+                const existingUsers = JSON.parse(localStorage.getItem('gallagher_demo_users') || '[]');
+                existingUsers.push(userData);
+                localStorage.setItem('gallagher_demo_users', JSON.stringify(existingUsers));
+                
+                if (formData.newsletter) {
+                    const existingSubscribers = JSON.parse(localStorage.getItem('gallagher_demo_subscribers') || '[]');
+                    existingSubscribers.push({
+                        userId: userData.id,
+                        email: formData.email,
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        subscribedAt: new Date().toISOString()
+                    });
+                    localStorage.setItem('gallagher_demo_subscribers', JSON.stringify(existingSubscribers));
+                }
+                
+                showSuccessPage();
+            }, 2000);
+        }
+
+        function showSuccessPage() {
+            const formContainers = ['signupForm', 'signupFormMobile'];
+            
+            formContainers.forEach(containerId => {
+                const container = document.getElementById(containerId);
+                if (container) {
+                    container.innerHTML = `
+                        <div class="success-container">
+                            <div class="success-icon">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 12l2 2 4-4"></path>
+                                    <path d="M21 12c0 1.66-.61 3.17-1.62 4.32-.46.53-.98 1.01-1.55 1.43-1.08.8-2.42 1.25-3.83 1.25-1.66 0-3.17-.61-4.32-1.62-.53-.46-1.01-.98-1.43-1.55-.8-1.08-1.25-2.42-1.25-3.83 0-1.66.61-3.17 1.62-4.32.46-.53.98-1.01 1.55-1.43C9.25 4.45 10.59 4 12 4c1.66 0 3.17.61 4.32 1.62.53.46 1.01.98 1.43 1.55.8 1.08 1.25 2.42 1.25 3.83z"></path>
+                                </svg>
+                            </div>
+                            <h2 class="success-title">Welcome to Gallagher Art School!</h2>
+                            <p class="success-description">Your demo account has been created successfully and stored locally.</p>
+                            <button type="button" class="nav-button primary" onclick="window.location.reload()">
+                                Try Demo Again
+                            </button>
+                        </div>
+                    `;
+                }
+            });
+        }
+
+        function toggleAdmin() {
+            const users = JSON.parse(localStorage.getItem('gallagher_demo_users') || '[]');
+            const subscribers = JSON.parse(localStorage.getItem('gallagher_demo_subscribers') || '[]');
+            
+            let adminContent = `
+                <h3>Admin Dashboard</h3>
+                <p><strong>Total Signups:</strong> ${users.length}</p>
+                <p><strong>Newsletter Subscribers:</strong> ${subscribers.length}</p>
+                
+                <h4>Recent Signups:</h4>
+            `;
+            
+            if (users.length > 0) {
+                adminContent += '<ul>';
+                users.slice(-5).reverse().forEach(user => {
+                    adminContent += `<li>${user.firstName} ${user.lastName} (${user.email}) - ${new Date(user.createdAt).toLocaleDateString()}</li>`;
+                });
+                adminContent += '</ul>';
+            } else {
+                adminContent += '<p>No signups yet.</p>';
+            }
+            
+            alert(adminContent.replace(/<[^>]+>/g, '\n'));
+        }
+    </script>
+</body>
+</html>

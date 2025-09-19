@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Gallagher Art School - Art Classes for All Ages</title>
+    <meta name="description" content="Join Gallagher Art School and explore your artistic potential. Art classes for all ages taught by Yale MFA graduate. Sign up today!">
+
+    <style>
+        /* Custom variables matching your design system */
+        :root {
+            --font-size: 14px;
+            --background: #ffffff;
+            --foreground: oklch(0.145 0 0);
+            --primary: #030213;
+            --primary-foreground: oklch(1 0 0);
+            --border: rgba(0, 0, 0, 0.1);
+            --input-background: #f3f3f5;
+            --font-weight-medium: 500;
+            --font-weight-normal: 400;
+            --radius: 0.625rem;
+        }
+
+        html {
+            font-size: var(--font-size);
+        }
+
+        /* Typography base styles */
+        body {
+            font-size: 1rem;
+            font-weight: var(--font-weight-normal);
+            line-height: 1.5;
+        }
+
+        h1 { font-size: 1.5rem; font-weight: var(--font-weight-medium); line-height: 1.5; }
+        h2 { font-size: 1.25rem; font-weight: var(--font-weight-medium); line-height: 1.5; }
+        h3 { font-size: 1.125rem; font-weight: var(--font-weight-medium); line-height: 1.5; }
+        h4 { font-size: 1rem; font-weight: var(--font-weight-medium); line-height: 1.5; }
+        p { font-size: 1rem; font-weight: var(--font-weight-normal); line-height: 1.5; }
+        label { font-size: 1rem; font-weight: var(--font-weight-medium); line-height: 1.5; }
+        button { font-size: 1rem; font-weight: var(--font-weight-medium); line-height: 1.5; }
+        input { font-size: 1rem; font-weight: var(--font-weight-normal); line-height: 1.5; }
+
+        /* Custom animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+        .animate-slide-in { animation: slideIn 0.3s ease-out; }
+        .animate-scale-in { animation: scaleIn 0.5s ease-out; }
+
+        /* Carousel styles */
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Form styles */
+        .signup-bg {
+            background: linear-gradient(to bottom right, 
+                rgb(249, 250, 251), 
+                rgb(255, 255, 255), 
+                rgba(243, 244, 246, 0.8)
+            );
+        }
+
+        /* Custom checkbox styles */
+        .custom-checkbox {
+            appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #d1d5db;
+            border-radius: 0.375rem;
+            background: white;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .custom-checkbox:checked {
+            background: #3b82f6;
+            border-color: #3b82f6;
+        }
+
+        .custom-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* Loading spinner */
+        .spinner {
+            border: 2px solid #f3f4f6;
+            border-top: 2px solid #3b82f6;
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Hide/show elements */
+        .hidden { display: none !important; }
+        
+        /* Mobile-friendly interest buttons */
+        .interest-button {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 2px solid #e5e7eb;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-height: 3.5rem; /* 56px - good for mobile touch */
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .interest-button:hover {
+            border-color: #d1d5db;
+            background: #f9fafb;
+        }
+
+        .interest-button.selected {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+        .interest-button .checkbox-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #d1d5db;
+            border-radius: 0.375rem;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .interest-button.selected .checkbox-icon {
+            background: #3b82f6;
+            border-color: #3b82f6;
+            color: white;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 1023px) {
+            .mobile-stack {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .interest-button {
+                min-height: 4rem; /* Even larger on mobile */
+                font-size: 1rem;
+                padding: 1.25rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+    <!-- Main Container -->
+    <div id="app" class="min-h-screen">
+        
+        <!-- Admin Dashboard (Initially Hidden) -->
+        <div id="adminView" class="hidden min-h-screen signup-bg">
+            <div class="absolute top-4 left-4 z-20">
+                <button id="backToSignupBtn" class="flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m12 19-7-7 7-7"/>
+                        <path d="M19 12H5"/>
+                    </svg>
+                    Back to Signup
+                </button>
+            </div>
+            <div class="p-8 pt-20">
+                <div class="max-w-6xl mx-auto">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <!-- Total Students -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Total Students</p>
+                                    <p id="totalStudents" class="text-2xl font-bold text-gray-900">0</p>
+                                </div>
+                                <svg class="w-8 h-8 text-blue-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Newsletter Subscribers -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Newsletter Subscribers</p>
+                                    <p id="totalSubscribers" class="text-2xl font-bold text-gray-900">0</p>
+                                </div>
+                                <svg class="w-8 h-8 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                    <polyline points="22,6 12,13 2,6"/>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- Unique Students -->
+                        <div class="bg-white p-6 rounded-lg shadow-sm border">
+                            <div class="flex items-center justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-600">Unique Students</p>
+                                    <p id="uniqueStudents" class="text-2xl font-bold text-gray-900">0</p>
+                                </div>
+                                <svg class="w-8 h-8 text-purple-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                                    <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                                    <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                                    <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Student List -->
+                    <div class="bg-white rounded-lg shadow-sm border">
+                        <div class="p-6 border-b">
+                            <h2 class="text-xl font-semibold text-gray-900">Recent Students</h2>
+                        </div>
+                        <div class="p-6">
+                            <div id="studentsList" class="space-y-4">
+                                <p class="text-gray-500 text-center py-8">No students enrolled yet.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Signup View -->
+        <div id="signupView" class="min-h-screen">
+            <!-- DESKTOP VERSION: Side by side layout -->
+            <div class="hidden lg:flex min-h-screen">
+                <!-- LEFT: Carousel -->
+                <div class="w-1/2 h-screen">
+                    <div class="carousel-container">
+                        <div class="carousel-slide active">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&h=1200&fit=crop&q=80" alt="Art student painting" />
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end">
+                                <div class="p-8 text-white">
+                                    <h3 class="text-2xl font-bold mb-2">Discover Your Artistic Voice</h3>
+                                    <p class="text-lg opacity-90">Join our community of passionate artists and explore various mediums under expert guidance.</p>
+                                    <button class="mt-4 px-6 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors">
+                                        Learn More
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1502780402662-acc01917477e?w=800&h=1200&fit=crop&q=80" alt="Art studio workspace" />
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end">
+                                <div class="p-8 text-white">
+                                    <h3 class="text-2xl font-bold mb-2">Professional Art Instruction</h3>
+                                    <p class="text-lg opacity-90">Learn from Yale MFA graduate with years of teaching experience and artistic expertise.</p>
+                                    <button class="mt-4 px-6 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors">
+                                        View Portfolio
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1456086272160-b28b0645b729?w=800&h=1200&fit=crop&q=80" alt="Art supplies and brushes" />
+                            <div class="absolute inset-0 bg-black bg-opacity-40 flex items-end">
+                                <div class="p-8 text-white">
+                                    <h3 class="text-2xl font-bold mb-2">All Ages Welcome</h3>
+                                    <p class="text-lg opacity-90">From children to adults, our classes are designed to inspire creativity at every level.</p>
+                                    <button class="mt-4 px-6 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors">
+                                        Class Schedule
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- RIGHT: Form -->
+                <div class="w-1/2 h-screen signup-bg flex items-center justify-center p-6 relative">
+                    <!-- Admin button -->
+                    <div class="absolute top-4 right-4 z-10">
+                        <button id="adminBtn" class="flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-lg hover:bg-white transition-colors">
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                            Admin
+                        </button>
+                    </div>
+                    
+                    <!-- Signup Form -->
+                    <div class="w-full max-w-md">
+                        <div id="signupForm" class="bg-white rounded-xl shadow-lg border-0 p-8"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MOBILE VERSION: Stacked layout -->
+            <div class="lg:hidden min-h-screen">
+                <!-- TOP: Form section -->
+                <div class="signup-bg min-h-[60vh] flex items-center justify-center p-6 relative">
+                    <!-- Admin button -->
+                    <div class="absolute top-4 right-4 z-10">
+                        <button id="adminBtnMobile" class="flex items-center gap-2 px-3 py-2 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-lg hover:bg-white transition-colors text-sm">
+                            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                            <span class="hidden sm:inline">Admin</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Form -->
+                    <div class="w-full max-w-md">
+                        <div id="signupFormMobile" class="bg-white rounded-xl shadow-lg border-0 p-6"></div>
+                    </div>
+                </div>
+                
+                <!-- BOTTOM: Carousel section -->
+                <div class="h-64">
+                    <div class="carousel-container">
+                        <div class="carousel-slide active">
+                            <img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=800&h=400&fit=crop&q=80" alt="Art student painting" />
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1502780402662-acc01917477e?w=800&h=400&fit=crop&q=80" alt="Art studio workspace" />
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="https://images.unsplash.com/photo-1456086272160-b28b0645b729?w=800&h=400&fit=crop&q=80" alt="Art supplies and brushes" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let currentStep = 'personal';
+        let isLoading = false;
+        let formData = {
+            firstName: '',
+            lastName: '',
+            email: '',
+            phone: '',
+            experience: '',
+            interests: [],
+            hearAboutUs: '',
+            hearAboutUsOther: '',
+            password: '',
+            confirmPassword: '',
+            newsletter: false
+        };
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCarousel();
+            renderSignupForm();
+            bindEventListeners();
+            updateAdminDashboard();
+        });
+
+        // Carousel functionality
+        function initializeCarousel() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            let currentSlide = 0;
+
+            function nextSlide() {
+                slides[currentSlide].classList.remove('active');
+                currentSlide = (currentSlide + 1) % slides.length;
+                slides[currentSlide].classList.add('active');
+            }
+
+            // Auto-advance every 4 seconds
+            setInterval(nextSlide, 4000);
+        }
+
+        // Event listeners
+        function bindEventListeners() {
+            // Admin buttons
+            document.getElementById('adminBtn')?.addEventListener('click', () => showAdminDashboard());
+            document.getElementById('adminBtnMobile')?.addEventListener('click', () => showAdminDashboard());
+            document.getElementById('backToSignupBtn')?.addEventListener('click', () => showSignupView());
+        }
+
+        // View switching
+        function showAdminDashboard() {
+            document.getElementById('signupView').classList.add('hidden');
+            document.getElementById('adminView').classList.remove('hidden');
+            updateAdminDashboard();
+        }
+
+        function showSignupView() {
+            document.getElementById('adminView').classList.add('hidden');
+            document.getElementById('signupView').classList.remove('hidden');
+        }
+
+        // Admin dashboard
+        function updateAdminDashboard() {
+            const students = JSON.parse(localStorage.getItem('gallagher_demo_users') || '[]');
+            const subscribers = JSON.parse(localStorage.getItem('gallagher_demo_subscribers') || '[]');
+            
+            document.getElementById('totalStudents').textContent = students.length;
+            document.getElementById('totalSubscribers').textContent = subscribers.length;
+            document.getElementById('uniqueStudents').textContent = new Set(students.map(s => s.email)).size;
+            
+            renderStudentsList(students);
+        }
+
+        function renderStudentsList(students) {
+            const container = document.getElementById('studentsList');
+            
+            if (students.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 text-center py-8">No students enrolled yet.</p>';
+                return;
+            }
+
+            container.innerHTML = students.slice(0, 10).map(student => `
+                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div>
+                        <p class="font-medium">${student.firstName} ${student.lastName}</p>
+                        <p class="text-sm text-gray-600">${student.email}</p>
+                        <p class="text-xs text-gray-500">Experience: ${student.experience}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-sm text-gray-600">${new Date(student.createdAt).toLocaleDateString()}</p>
+                        ${student.newsletter ? '<span class="inline-block px-2 py-1 bg-green-100 text-green-800 text-xs rounded">Newsletter</span>' : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Signup form rendering
+        function renderSignupForm() {
+            const formHtml = `
+                <div class="text-center space-y-4 pb-6">
+                    <!-- Progress Icons -->
+                    <div class="flex items-center justify-center space-x-4 mb-4">
+                        ${renderProgressIcons()}
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h1 class="text-xl font-bold">Join Gallagher Art School</h1>
+                        <p class="text-sm text-gray-600">${getStepDescription()}</p>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div class="bg-blue-600 h-2 rounded-full transition-all duration-300" style="width: ${getProgress()}%"></div>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    ${renderErrorAlert()}
+                    ${renderSocialLogin()}
+                    ${renderStepContent()}
+                    ${renderNavigationButtons()}
+                </div>
+            `;
+            
+            document.getElementById('signupForm').innerHTML = formHtml;
+            document.getElementById('signupFormMobile').innerHTML = formHtml;
+            bindFormEventListeners();
+        }
+
+        function renderProgressIcons() {
+            const steps = [
+                { key: 'personal', title: 'Personal Info', icon: 'user' },
+                { key: 'preferences', title: 'Art Preferences', icon: 'palette' },
+                { key: 'account', title: 'Create Account', icon: 'mail' }
+            ];
+            
+            return steps.map((step, index) => {
+                const isActive = step.key === currentStep;
+                const isCompleted = getStepIndex(currentStep) > index;
+                const bgClass = isActive ? 'bg-black text-white' : isCompleted ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-400';
+                
+                return `
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${bgClass}">
+                            ${getStepIcon(step.icon)}
+                        </div>
+                        ${index < steps.length - 1 ? `<div class="w-12 h-0.5 mx-2 transition-colors duration-300 ${isCompleted ? 'bg-green-500' : 'bg-gray-200'}"></div>` : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getStepIcon(iconName) {
+            const icons = {
+                user: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+                palette: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>',
+                mail: '<svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>'
+            };
+            return icons[iconName] || '';
+        }
+
+        function getStepIndex(step) {
+            const steps = ['personal', 'preferences', 'account'];
+            return steps.indexOf(step);
+        }
+
+        function getProgress() {
+            return ((getStepIndex(currentStep) + 1) / 3) * 100;
+        }
+
+        function getStepDescription() {
+            const descriptions = {
+                personal: 'Tell us about yourself',
+                preferences: 'What interests you?',
+                account: 'Set up your login'
+            };
+            return descriptions[currentStep];
+        }
+
+        function renderErrorAlert() {
+            const error = window.currentError;
+            if (!error) return '';
+            
+            return `
+                <div class="flex items-center gap-2 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    <p class="text-sm">${error}</p>
+                </div>
+            `;
+        }
+
+        function renderSocialLogin() {
+            if (currentStep !== 'personal') return '';
+            
+            return `
+                <div class="space-y-4">
+                    <div class="grid grid-cols-1 gap-3">
+                        <button type="button" onclick="handleSocialLogin('google')" class="w-full h-12 bg-white hover:bg-gray-50 border border-gray-300 rounded-lg text-gray-700 text-sm font-medium flex items-center justify-center gap-2 transition-colors" ${isLoading ? 'disabled' : ''}>
+                            ${isLoading ? '<div class="spinner"></div>' : `
+                                <svg class="w-4 h-4" viewBox="0 0 24 24">
+                                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                                </svg>
+                            `}
+                            <span>Google</span>
+                        </button>
+                        
+                        <button type="button" onclick="handleSocialLogin('apple')" class="w-full h-12 bg-black hover:bg-gray-900 text-white text-sm font-medium flex items-center justify-center gap-2 transition-colors" ${isLoading ? 'disabled' : ''}>
+                            ${isLoading ? '<div class="spinner"></div>' : `
+                                <svg class="w-4 h-4" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                                </svg>
+                            `}
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                    
+                    <div class="relative my-6">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-gray-300"></div>
+                        </div>
+                        <div class="relative flex justify-center text-sm uppercase">
+                            <span class="bg-white px-4 text-gray-500 font-medium">Or continue with email</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderStepContent() {
+            switch (currentStep) {
+                case 'personal':
+                    return renderPersonalStep();
+                case 'preferences':
+                    return renderPreferencesStep();
+                case 'account':
+                    return renderAccountStep();
+                default:
+                    return '';
+            }
+        }
+
+        function renderPersonalStep() {
+            return `
+                <div class="animate-fade-in space-y-4">
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium">First Name *</label>
+                            <input type="text" id="firstName" value="${formData.firstName}" placeholder="John" class="w-full h-10 px-3 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''} />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium">Last Name *</label>
+                            <input type="text" id="lastName" value="${formData.lastName}" placeholder="Doe" class="w-full h-10 px-3 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''} />
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium">Email *</label>
+                        <input type="email" id="email" value="${formData.email}" placeholder="john@example.com" class="w-full h-10 px-3 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''} />
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium">Phone Number</label>
+                        <input type="tel" id="phone" value="${formData.phone}" placeholder="(555) 123-4567" class="w-full h-10 px-3 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''} />
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderPreferencesStep() {
+            const experienceOptions = [
+                { value: 'beginner', label: 'Complete Beginner' },
+                { value: 'some', label: 'Some Experience' },
+                { value: 'intermediate', label: 'Intermediate' },
+                { value: 'advanced', label: 'Advanced' },
+                { value: 'professional', label: 'Professional' }
+            ];
+
+            const interestOptions = [
+                'Drawing', 'Painting', 'Digital AI Art', 'Sculpture', 'Mixed Media AI & Collage', 'Color Theory'
+            ];
+
+            return `
+                <div class="animate-fade-in space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium">Art Experience Level *</label>
+                        <div class="relative">
+                            <select id="experience" class="w-full h-12 px-4 pr-12 bg-white border-2 border-gray-300 rounded-lg text-gray-900 text-sm font-medium appearance-none cursor-pointer focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''}>
+                                <option value="" disabled ${!formData.experience ? 'selected' : ''}>Select your experience level</option>
+                                ${experienceOptions.map(option => `
+                                    <option value="${option.value}" ${formData.experience === option.value ? 'selected' : ''}>${option.label}</option>
+                                `).join('')}
+                            </select>
+                            <svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6,9 12,15 18,9"/>
+                            </svg>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <label class="text-sm font-medium">Areas of Interest (select all that apply)</label>
+                        <div class="grid grid-cols-1 gap-2">
+                            ${interestOptions.map(interest => `
+                                <div class="relative">
+                                    <label class="flex items-center gap-3 p-3 rounded-lg border-2 transition-all cursor-pointer ${formData.interests.includes(interest) ? 'border-blue-500 bg-blue-50' : 'border-gray-200 hover:border-gray-300 bg-white'} ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}">
+                                        <input type="checkbox" value="${interest}" class="sr-only" ${formData.interests.includes(interest) ? 'checked' : ''} ${isLoading ? 'disabled' : ''} onchange="toggleInterest('${interest}')" />
+                                        <div class="w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${formData.interests.includes(interest) ? 'bg-blue-500 border-blue-500 text-white' : 'bg-white border-gray-300'}">
+                                            ${formData.interests.includes(interest) ? '<svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20,6 9,17 4,12"/></svg>' : ''}
+                                        </div>
+                                        <span class="text-sm font-medium text-gray-700">${interest}</span>
+                                    </label>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderAccountStep() {
+            const hearAboutOptions = [
+                { value: 'google', label: 'Google Search' },
+                { value: 'facebook', label: 'Facebook' },
+                { value: 'instagram', label: 'Instagram' },
+                { value: 'friend', label: 'Friend/Family' },
+                { value: 'flyer', label: 'Flyer/Advertisement' },
+                { value: 'other', label: 'Other' }
+            ];
+
+            return `
+                <div class="animate-fade-in space-y-4">
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium">How did you hear about us? *</label>
+                        <div class="relative">
+                            <select id="hearAboutUs" class="w-full h-12 px-4 pr-12 bg-white border-2 border-gray-300 rounded-lg text-gray-900 text-sm font-medium appearance-none cursor-pointer focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''}>
+                                <option value="" disabled ${!formData.hearAboutUs ? 'selected' : ''}>Select how you heard about us</option>
+                                ${hearAboutOptions.map(option => `
+                                    <option value="${option.value}" ${formData.hearAboutUs === option.value ? 'selected' : ''}>${option.label}</option>
+                                `).join('')}
+                            </select>
+                            <svg class="absolute right-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500 pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6,9 12,15 18,9"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    ${formData.hearAboutUs === 'other' ? `
+                        <div class="space-y-2">
+                            <label class="text-sm font-medium">Please specify</label>
+                            <input type="text" id="hearAboutUsOther" value="${formData.hearAboutUsOther}" placeholder="How did you hear about us?" class="w-full h-10 px-3 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''} />
+                        </div>
+                    ` : ''}
+
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium">Password *</label>
+                        <input type="password" id="password" value="${formData.password}" placeholder="Enter your password" class="w-full h-10 px-3 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''} />
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <label class="text-sm font-medium">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" value="${formData.confirmPassword}" placeholder="Confirm your password" class="w-full h-10 px-3 bg-gray-50 border border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200" ${isLoading ? 'disabled' : ''} />
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" id="newsletter" class="custom-checkbox" ${formData.newsletter ? 'checked' : ''} ${isLoading ? 'disabled' : ''} onchange="formData.newsletter = this.checked" />
+                        <label for="newsletter" class="text-sm text-gray-700 cursor-pointer">
+                            I'd like to receive updates about classes and events
+                        </label>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderNavigationButtons() {
+            const isFirstStep = currentStep === 'personal';
+            const isLastStep = currentStep === 'account';
+            
+            return `
+                <div class="flex gap-3 pt-4">
+                    ${!isFirstStep ? `
+                        <button type="button" onclick="handlePrevious()" class="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors" ${isLoading ? 'disabled' : ''}>
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m12 19-7-7 7-7"/>
+                                <path d="M19 12H5"/>
+                            </svg>
+                            Previous
+                        </button>
+                    ` : ''}
+                    
+                    <button type="button" onclick="${isLastStep ? 'handleSubmit()' : 'handleNext()'}" class="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors" ${isLoading ? 'disabled' : ''}>
+                        ${isLoading ? '<div class="spinner"></div>' : ''}
+                        ${isLastStep ? 'Create Account' : 'Next'}
+                        ${!isLastStep && !isLoading ? `
+                            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14"/>
+                                <path d="m12 5 7 7-7 7"/>
+                            </svg>
+                        ` : ''}
+                    </button>
+                </div>
+            `;
+        }
+
+        // Form event binding
+        function bindFormEventListeners() {
+            // Input change listeners
+            ['firstName', 'lastName', 'email', 'phone', 'password', 'confirmPassword', 'hearAboutUsOther'].forEach(field => {
+                const element = document.getElementById(field);
+                if (element) {
+                    element.addEventListener('input', (e) => {
+                        formData[field] = e.target.value;
+                    });
+                }
+            });
+
+            // Select change listeners
+            ['experience', 'hearAboutUs'].forEach(field => {
+                const element = document.getElementById(field);
+                if (element) {
+                    element.addEventListener('change', (e) => {
+                        formData[field] = e.target.value;
+                        if (field === 'hearAboutUs') {
+                            if (e.target.value !== 'other') {
+                                formData.hearAboutUsOther = '';
+                            }
+                            renderSignupForm(); // Re-render to show/hide "other" field
+                        }
+                    });
+                }
+            });
+        }
+
+        // Form handlers
+        function toggleInterest(interest) {
+            if (formData.interests.includes(interest)) {
+                formData.interests = formData.interests.filter(i => i !== interest);
+            } else {
+                formData.interests.push(interest);
+            }
+        }
+
+        function handleSocialLogin(provider) {
+            if (isLoading) return;
+            
+            isLoading = true;
+            renderSignupForm();
+            
+            setTimeout(() => {
+                alert(`${provider.charAt(0).toUpperCase() + provider.slice(1)} login requires additional setup. This is a demo version.`);
+                isLoading = false;
+                renderSignupForm();
+            }, 1000);
+        }
+
+        function validateStep(step) {
+            window.currentError = null;
+            
+            switch (step) {
+                case 'personal':
+                    if (!formData.firstName.trim()) {
+                        window.currentError = 'First name is required';
+                        return false;
+                    }
+                    if (!formData.lastName.trim()) {
+                        window.currentError = 'Last name is required';
+                        return false;
+                    }
+                    if (!formData.email.trim()) {
+                        window.currentError = 'Email is required';
+                        return false;
+                    }
+                    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+                        window.currentError = 'Please enter a valid email address';
+                        return false;
+                    }
+                    return true;
+                    
+                case 'preferences':
+                    if (!formData.experience) {
+                        window.currentError = 'Please select your experience level';
+                        return false;
+                    }
+                    return true;
+                    
+                case 'account':
+                    if (!formData.hearAboutUs) {
+                        window.currentError = 'Please select how you heard about us';
+                        return false;
+                    }
+                    if (formData.hearAboutUs === 'other' && !formData.hearAboutUsOther.trim()) {
+                        window.currentError = 'Please specify how you heard about us';
+                        return false;
+                    }
+                    if (!formData.password) {
+                        window.currentError = 'Password is required';
+                        return false;
+                    }
+                    if (formData.password.length < 6) {
+                        window.currentError = 'Password must be at least 6 characters long';
+                        return false;
+                    }
+                    if (formData.password !== formData.confirmPassword) {
+                        window.currentError = 'Passwords do not match';
+                        return false;
+                    }
+                    return true;
+                    
+                default:
+                    return true;
+            }
+        }
+
+        function handleNext() {
+            if (!validateStep(currentStep)) {
+                renderSignupForm();
+                return;
+            }
+            
+            const steps = ['personal', 'preferences', 'account'];
+            const currentIndex = steps.indexOf(currentStep);
+            
+            if (currentIndex < steps.length - 1) {
+                currentStep = steps[currentIndex + 1];
+                renderSignupForm();
+            }
+        }
+
+        function handlePrevious() {
+            const steps = ['personal', 'preferences', 'account'];
+            const currentIndex = steps.indexOf(currentStep);
+            
+            if (currentIndex > 0) {
+                currentStep = steps[currentIndex - 1];
+                renderSignupForm();
+            }
+        }
+
+        async function handleSubmit() {
+            if (!validateStep('account')) {
+                renderSignupForm();
+                return;
+            }
+
+            isLoading = true;
+            window.currentError = null;
+            renderSignupForm();
+
+            try {
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Create demo user
+                const demoUser = {
+                    id: `demo_${Date.now()}`,
+                    firstName: formData.firstName,
+                    lastName: formData.lastName,
+                    email: formData.email,
+                    phone: formData.phone,
+                    experience: formData.experience,
+                    interests: formData.interests,
+                    hearAboutUs: formData.hearAboutUs,
+                    hearAboutUsOther: formData.hearAboutUsOther,
+                    newsletter: formData.newsletter,
+                    createdAt: new Date().toISOString(),
+                    demoMode: true
+                };
+                
+                // Save to localStorage
+                const existingUsers = JSON.parse(localStorage.getItem('gallagher_demo_users') || '[]');
+                existingUsers.push(demoUser);
+                localStorage.setItem('gallagher_demo_users', JSON.stringify(existingUsers));
+                
+                if (formData.newsletter) {
+                    const existingSubscribers = JSON.parse(localStorage.getItem('gallagher_demo_subscribers') || '[]');
+                    existingSubscribers.push({
+                        userId: demoUser.id,
+                        email: formData.email,
+                        firstName: formData.firstName,
+                        lastName: formData.lastName,
+                        subscribedAt: new Date().toISOString()
+                    });
+                    localStorage.setItem('gallagher_demo_subscribers', JSON.stringify(existingSubscribers));
+                }
+                
+                // Show success message
+                showSuccessMessage();
+                
+            } catch (error) {
+                window.currentError = 'Failed to create account. Please try again.';
+                isLoading = false;
+                renderSignupForm();
+            }
+        }
+
+        function showSuccessMessage() {
+            const successHtml = `
+                <div class="text-center space-y-6 py-8">
+                    <div class="animate-scale-in">
+                        <svg class="w-16 h-16 text-green-500 mx-auto mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22,4 12,14.01 9,11.01"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="animate-fade-in space-y-4">
+                        <h2 class="text-2xl font-bold text-green-700">Demo Account Created!</h2>
+                        <p class="text-sm text-gray-600">Your demo account has been created and stored locally.</p>
+                        
+                        <button onclick="resetForm()" class="mt-6 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors">
+                            Try Demo Again
+                        </button>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('signupForm').innerHTML = successHtml;
+            document.getElementById('signupFormMobile').innerHTML = successHtml;
+        }
+
+        function resetForm() {
+            currentStep = 'personal';
+            isLoading = false;
+            window.currentError = null;
+            formData = {
+                firstName: '',
+                lastName: '',
+                email: '',
+                phone: '',
+                experience: '',
+                interests: [],
+                hearAboutUs: '',
+                hearAboutUsOther: '',
+                password: '',
+                confirmPassword: '',
+                newsletter: false
+            };
+            renderSignupForm();
+        }
+    </script>
+</body>
+</html>

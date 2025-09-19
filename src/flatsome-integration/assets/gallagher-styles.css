@@ -1,0 +1,1068 @@
+/* Gallagher Art School - Flatsome Integration Styles */
+
+/* Reset and base styles */
+.gallagher-signup-container {
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.gallagher-signup-container *,
+.gallagher-signup-container *::before,
+.gallagher-signup-container *::after {
+    box-sizing: border-box;
+}
+
+/* Background and overlay */
+.gallagher-signup-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: var(--gallagher-bg-image, url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'));
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.gallagher-signup-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(59, 130, 246, 0.85), rgba(67, 56, 202, 0.9));
+    z-index: 2;
+}
+
+/* Admin button */
+.gallagher-admin-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 20;
+}
+
+/* Main content layout */
+.gallagher-main-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: row;
+}
+
+/* Enhanced Carousel panel */
+.gallagher-carousel-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 300px;
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+/* Carousel slide container */
+.gallagher-carousel-slides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.gallagher-carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gallagher-carousel-slide.active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.gallagher-carousel-slide.entering {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.gallagher-carousel-slide.exiting {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+/* Carousel overlay for content readability */
+.gallagher-carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+/* Carousel content */
+.gallagher-carousel-content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 2rem;
+}
+
+.gallagher-carousel-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: gallagher-fade-in-up 0.6s ease forwards 0.2s;
+}
+
+.gallagher-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: gallagher-fade-in-up 0.6s ease forwards 0.4s;
+}
+
+.gallagher-slide-content {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: gallagher-fade-in-up 0.6s ease forwards 0.6s;
+}
+
+.gallagher-slide-content h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: white;
+}
+
+.gallagher-slide-content p {
+    font-size: 1.125rem;
+    opacity: 0.9;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-slide-cta {
+    background: rgba(147, 51, 234, 0.9);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.gallagher-slide-cta:hover {
+    background: rgba(126, 34, 206, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+/* Navigation Controls */
+.gallagher-carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    z-index: 15;
+}
+
+.gallagher-carousel-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.gallagher-carousel-nav.prev {
+    left: 1rem;
+}
+
+.gallagher-carousel-nav.next {
+    right: 1rem;
+}
+
+/* Play/Pause Control */
+.gallagher-carousel-control {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+    z-index: 15;
+}
+
+.gallagher-carousel-control:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced Carousel indicators */
+.gallagher-carousel-indicators {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 15;
+}
+
+.gallagher-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.gallagher-indicator.active {
+    background: white;
+    transform: scale(1.2);
+}
+
+.gallagher-indicator:hover {
+    background: rgba(255, 255, 255, 0.75);
+}
+
+/* Progress Bar */
+.gallagher-carousel-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 15;
+}
+
+.gallagher-carousel-progress-fill {
+    height: 100%;
+    background: white;
+    width: 0%;
+    transition: width linear;
+}
+
+/* Animations */
+@keyframes gallagher-fade-in-up {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes gallagher-slide-in-right {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes gallagher-slide-out-left {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+/* Form panel */
+.gallagher-form-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.gallagher-signup-form {
+    width: 100%;
+    max-width: 448px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Step indicators */
+.gallagher-step-indicators {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    gap: 0;
+}
+
+.gallagher-step-indicator {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    max-width: 56px !important;
+    max-height: 56px !important;
+    border-radius: 50% !important;
+    background: #e5e7eb;
+    color: #9ca3af;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.3s ease;
+    border: none !important;
+    flex-shrink: 0 !important;
+    box-sizing: border-box !important;
+}
+
+.gallagher-step-indicator.active {
+    background: #000000;
+    color: white;
+}
+
+.gallagher-step-indicator.completed {
+    background: #22c55e;
+    color: white;
+}
+
+.gallagher-step-connector {
+    width: 48px;
+    height: 2px;
+    background: #e5e7eb;
+    transition: all 0.3s ease;
+    margin: 0 0.75rem;
+}
+
+.gallagher-step-connector.completed {
+    background: #22c55e;
+}
+
+/* Form header */
+.gallagher-form-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.gallagher-form-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #1f2937;
+}
+
+.gallagher-form-header p {
+    color: #6b7280;
+    margin: 0;
+}
+
+/* Progress bar */
+.gallagher-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    margin: 1rem 0;
+    overflow: hidden;
+}
+
+.gallagher-progress-fill {
+    height: 100%;
+    background: #3b82f6;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* Alerts */
+.gallagher-alert {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.gallagher-alert-error {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.gallagher-alert-success {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #bbf7d0;
+}
+
+/* Form styles */
+.gallagher-form-step {
+    margin-bottom: 2rem;
+}
+
+.gallagher-form-group {
+    margin-bottom: 1rem;
+}
+
+.gallagher-form-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.gallagher-form-row .gallagher-form-group {
+    flex: 1;
+}
+
+.gallagher-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.gallagher-form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.gallagher-form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    background: #f3f3f5;
+    color: #1f2937;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding-right: 2.5rem;
+    appearance: none;
+    outline: none;
+}
+
+.gallagher-form-group input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.gallagher-form-group select:focus {
+    outline: none;
+    box-shadow: none;
+    background: #f3f3f5;
+}
+
+.gallagher-form-group small {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Social buttons */
+.gallagher-social-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: #374151;
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.gallagher-social-btn:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+/* Divider */
+.gallagher-divider {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.gallagher-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.gallagher-divider span {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0 1rem;
+    color: #6b7280;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+/* Checkbox grid */
+.gallagher-checkbox-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.gallagher-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.gallagher-checkbox-item input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.gallagher-checkbox-item label {
+    margin: 0;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+/* Buttons */
+.gallagher-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-size: 0.875rem;
+    line-height: 1;
+}
+
+.gallagher-btn-primary {
+    background: #3b82f6;
+    color: white;
+}
+
+.gallagher-btn-primary:hover {
+    background: #2563eb;
+}
+
+.gallagher-btn-secondary {
+    background: transparent;
+    color: #6b7280;
+    border: 1px solid #d1d5db;
+}
+
+.gallagher-btn-secondary:hover {
+    background: #f9fafb;
+}
+
+.gallagher-btn-outline {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    backdrop-filter: blur(4px);
+}
+
+.gallagher-btn-outline:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.gallagher-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.gallagher-btn:disabled:hover {
+    background: inherit;
+}
+
+/* Form navigation */
+.gallagher-form-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+/* Form footer */
+.gallagher-form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.gallagher-form-footer a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.gallagher-form-footer a:hover {
+    text-decoration: underline;
+}
+
+/* Terms */
+.gallagher-terms {
+    margin-top: 1rem;
+}
+
+.gallagher-terms small {
+    font-size: 0.75rem;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+/* Utility classes */
+.gallagher-hidden {
+    display: none !important;
+}
+
+/* Admin Dashboard Styles */
+.gallagher-admin-dashboard {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: white;
+    z-index: 30;
+    overflow-y: auto;
+    padding: 2rem;
+}
+
+.gallagher-admin-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.gallagher-admin-header h2 {
+    margin: 0;
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+.gallagher-admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.gallagher-stat-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.gallagher-stat-card h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.gallagher-stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+}
+
+.gallagher-stat-card small {
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+.gallagher-admin-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.gallagher-tab-btn {
+    padding: 0.75rem 1rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #6b7280;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.gallagher-tab-btn.active {
+    color: #3b82f6;
+    border-bottom-color: #3b82f6;
+}
+
+.gallagher-tab-content {
+    display: none;
+}
+
+.gallagher-tab-content.active {
+    display: block;
+}
+
+.gallagher-admin-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.gallagher-admin-section-header h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.gallagher-interests-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.gallagher-interest-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.gallagher-interest-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.gallagher-interest-header h4 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.gallagher-interest-badge {
+    background: #f3f4f6;
+    color: #374151;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.gallagher-student-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.gallagher-student-item:last-child {
+    border-bottom: none;
+}
+
+.gallagher-student-name {
+    font-weight: 500;
+    color: #1f2937;
+    margin-bottom: 0.25rem;
+}
+
+.gallagher-student-meta {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+.gallagher-newsletter-list {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.gallagher-newsletter-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.gallagher-newsletter-item:last-child {
+    border-bottom: none;
+}
+
+.gallagher-newsletter-info h5 {
+    margin: 0 0 0.25rem 0;
+    font-weight: 500;
+    color: #1f2937;
+}
+
+.gallagher-newsletter-info p {
+    margin: 0;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.gallagher-newsletter-date {
+    font-size: 0.75rem;
+    color: #6b7280;
+}
+
+/* Mobile responsive */
+@media (max-width: 1024px) {
+    .gallagher-main-content {
+        flex-direction: column;
+    }
+    
+    .gallagher-carousel-panel {
+        min-height: 250px;
+    }
+    
+    .gallagher-carousel-content h1 {
+        font-size: 2rem;
+    }
+    
+    .gallagher-form-panel {
+        padding: 1rem;
+    }
+    
+    .gallagher-form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .gallagher-checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallagher-admin-dashboard {
+        padding: 1rem;
+    }
+    
+    .gallagher-admin-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .gallagher-admin-tabs {
+        flex-direction: column;
+        gap: 0;
+    }
+    
+    .gallagher-admin-section-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .gallagher-newsletter-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .gallagher-signup-container {
+        font-size: 14px;
+    }
+    
+    .gallagher-admin-button {
+        top: 0.5rem;
+        right: 0.5rem;
+    }
+    
+    .gallagher-social-buttons {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallagher-form-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .gallagher-step-indicators {
+        gap: 0.5rem;
+    }
+    
+    .gallagher-step-indicator {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+    }
+    
+    .gallagher-step-connector {
+        width: 24px !important;
+        margin: 0 0.5rem !important;
+    }
+}
+
+/* Flatsome theme compatibility */
+.fl-builder-content .gallagher-signup-container {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Override Flatsome button styles for our buttons */
+.gallagher-btn {
+    border-radius: 0.5rem !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+/* Strong overrides for step indicators to prevent Flatsome CSS conflicts */
+.gallagher-signup-container .gallagher-step-indicator,
+.fl-builder-content .gallagher-step-indicator,
+.ux-section .gallagher-step-indicator {
+    width: 56px !important;
+    height: 56px !important;
+    min-width: 56px !important;
+    min-height: 56px !important;
+    max-width: 56px !important;
+    max-height: 56px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+    aspect-ratio: 1 / 1 !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+    transform: none !important;
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+}
+
+/* Ensure step indicators maintain circular shape on mobile */
+@media (max-width: 640px) {
+    .gallagher-signup-container .gallagher-step-indicator,
+    .fl-builder-content .gallagher-step-indicator,
+    .ux-section .gallagher-step-indicator {
+        width: 40px !important;
+        height: 40px !important;
+        min-width: 40px !important;
+        min-height: 40px !important;
+        max-width: 40px !important;
+        max-height: 40px !important;
+        border-radius: 50% !important;
+        aspect-ratio: 1 / 1 !important;
+        transform: none !important;
+        -webkit-transform: none !important;
+        -moz-transform: none !important;
+        -ms-transform: none !important;
+        -o-transform: none !important;
+    }
+}
+
+/* Ensure proper z-index with Flatsome elements */
+.gallagher-signup-container {
+    z-index: 1;
+}
+
+.gallagher-admin-dashboard {
+    z-index: 9999;
+}

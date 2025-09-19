@@ -1,0 +1,563 @@
+/* Gallagher Art School Signup Form - Original Layout v4.2.0 */
+/* Matches the original Figma screenshots exactly */
+
+.gallagher-signup-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Carousel Section - Left Half */
+.gallagher-carousel-section {
+    width: 50%;
+    height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Form Section - Right Half */
+.gallagher-form-section {
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    background-image: url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gallagher-form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(30, 58, 138, 0.85), rgba(49, 46, 129, 0.9));
+    z-index: 1;
+}
+
+/* Form Card - Original Size */
+.gallagher-original-card {
+    width: 100%;
+    max-width: 400px; /* ORIGINAL SIZE */
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 10;
+}
+
+/* Progress Icons */
+.gallagher-progress-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-progress-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.gallagher-progress-icon.active {
+    background-color: #000000;
+    color: white;
+}
+
+.gallagher-progress-icon.completed {
+    background-color: #10b981;
+    color: white;
+}
+
+.gallagher-progress-icon.inactive {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+}
+
+.gallagher-progress-line {
+    width: 48px;
+    height: 2px;
+    transition: background-color 0.3s ease;
+}
+
+.gallagher-progress-line.completed {
+    background-color: #10b981;
+}
+
+.gallagher-progress-line.inactive {
+    background-color: #e5e7eb;
+}
+
+/* Form Headers */
+.gallagher-form-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-form-title {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: #1f2937 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.gallagher-form-description {
+    font-size: 0.875rem !important;
+    color: #6b7280 !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Progress Bar */
+.gallagher-progress-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-progress-fill {
+    height: 100%;
+    background-color: #000000;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+}
+
+/* Social Buttons */
+.gallagher-social-section {
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    height: 48px;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-decoration: none;
+    width: 100%;
+    margin-bottom: 0.75rem;
+}
+
+.gallagher-social-btn:last-child {
+    margin-bottom: 0;
+}
+
+.gallagher-google-btn {
+    background: white;
+    color: #374151;
+    border: 2px solid #d1d5db;
+}
+
+.gallagher-google-btn:hover {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.gallagher-apple-btn {
+    background: #000000;
+    color: white;
+}
+
+.gallagher-apple-btn:hover {
+    background: #1f2937;
+}
+
+/* Separator */
+.gallagher-separator {
+    position: relative;
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.gallagher-separator::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.gallagher-separator-text {
+    background: rgba(255, 255, 255, 0.97);
+    padding: 0 1rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Form Fields */
+.gallagher-form-step {
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-form-grid {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.gallagher-form-grid.two-columns {
+    grid-template-columns: 1fr 1fr;
+}
+
+.gallagher-form-group {
+    margin-bottom: 1rem;
+}
+
+.gallagher-form-group:last-child {
+    margin-bottom: 0;
+}
+
+.gallagher-form-label {
+    display: block;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: #374151 !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.gallagher-form-group input {
+    width: 100% !important;
+    height: 40px !important; /* ORIGINAL SIZE */
+    padding: 0.75rem !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 0.5rem !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    transition: all 0.2s ease !important;
+    background: white !important;
+    background-color: white !important;
+    box-sizing: border-box !important;
+    color: #374151 !important;
+    outline: none !important;
+}
+
+.gallagher-form-group input:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+}
+
+.gallagher-form-group input:disabled {
+    background-color: #f3f4f6 !important;
+    color: #9ca3af !important;
+    cursor: not-allowed !important;
+}
+
+/* Custom Select */
+.gallagher-custom-select {
+    position: relative !important;
+    margin-bottom: 1rem !important;
+}
+
+.gallagher-custom-select select {
+    width: 100% !important;
+    height: 40px !important; /* ORIGINAL SIZE */
+    padding: 0.75rem 2.5rem 0.75rem 0.75rem !important;
+    background: white !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 0.5rem !important;
+    color: #374151 !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    cursor: pointer !important;
+    outline: none !important;
+    transition: border-color 0.2s ease !important;
+    background-image: none !important;
+}
+
+.gallagher-custom-select select:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
+}
+
+.gallagher-custom-select select:disabled {
+    background-color: #f3f4f6 !important;
+    color: #9ca3af !important;
+    cursor: not-allowed !important;
+}
+
+.gallagher-select-chevron {
+    position: absolute !important;
+    right: 0.75rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    color: #6b7280 !important;
+    pointer-events: none !important;
+}
+
+/* Checkboxes - Original Style */
+.gallagher-original-checkbox {
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.75rem !important;
+    padding: 0.75rem !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 0.5rem !important;
+    background: white !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    user-select: none !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.gallagher-original-checkbox:last-child {
+    margin-bottom: 0 !important;
+}
+
+.gallagher-original-checkbox:hover {
+    border-color: #d1d5db !important;
+}
+
+.gallagher-original-checkbox.checked {
+    border-color: #3b82f6 !important;
+    background-color: #eff6ff !important;
+}
+
+.gallagher-checkbox-box {
+    width: 20px !important;
+    height: 20px !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 4px !important;
+    background: white !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+}
+
+.gallagher-checkbox-box.checked {
+    background-color: #3b82f6 !important;
+    border-color: #3b82f6 !important;
+    color: white !important;
+}
+
+.gallagher-checkbox-check {
+    width: 12px !important;
+    height: 12px !important;
+    opacity: 0 !important;
+    transition: opacity 0.2s ease !important;
+}
+
+.gallagher-checkbox-check.visible {
+    opacity: 1 !important;
+}
+
+.gallagher-original-checkbox label {
+    font-size: 0.875rem !important;
+    color: #374151 !important;
+    cursor: pointer !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+}
+
+/* Navigation Buttons */
+.gallagher-form-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+}
+
+.gallagher-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    height: 40px;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: none;
+}
+
+.gallagher-btn-outline {
+    background: white;
+    color: #374151;
+    border: 2px solid #d1d5db;
+}
+
+.gallagher-btn-outline:hover:not(:disabled) {
+    background: #f9fafb;
+    border-color: #9ca3af;
+}
+
+.gallagher-btn-primary {
+    background: #000000;
+    color: white;
+}
+
+.gallagher-btn-primary:hover:not(:disabled) {
+    background: #1f2937;
+}
+
+.gallagher-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Sign in link */
+.gallagher-signin-link {
+    text-align: center;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.gallagher-signin-link p {
+    font-size: 0.75rem !important;
+    color: #6b7280 !important;
+    margin: 0 !important;
+}
+
+.gallagher-signin-link button {
+    background: none !important;
+    border: none !important;
+    color: #3b82f6 !important;
+    font-weight: 500 !important;
+    font-size: 0.75rem !important;
+    cursor: pointer !important;
+    text-decoration: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.gallagher-signin-link button:hover {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+}
+
+/* Error/Success States */
+.gallagher-alert {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+}
+
+.gallagher-alert-error {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+}
+
+.gallagher-alert-success {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #16a34a;
+}
+
+/* Loading States */
+.gallagher-loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.gallagher-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: gallagher-spin 1s linear infinite;
+}
+
+@keyframes gallagher-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .gallagher-signup-container {
+        flex-direction: column;
+    }
+    
+    .gallagher-carousel-section,
+    .gallagher-form-section {
+        width: 100%;
+        height: auto;
+        min-height: 50vh;
+    }
+    
+    .gallagher-form-section {
+        padding: 1rem;
+    }
+    
+    .gallagher-original-card {
+        max-width: 100%;
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .gallagher-form-grid.two-columns {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallagher-progress-icons {
+        gap: 0.5rem;
+    }
+    
+    .gallagher-progress-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .gallagher-progress-line {
+        width: 32px;
+    }
+}
+
+/* Hide scrollbars but keep functionality */
+.gallagher-original-card {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.gallagher-original-card::-webkit-scrollbar {
+    display: none;
+}

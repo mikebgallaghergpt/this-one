@@ -1,0 +1,1355 @@
+/* Gallagher Art School - Flatsome Optimized Styles */
+
+/* ==========================================================================
+   Main Container & Layout
+   ========================================================================== */
+
+.gallagher-signup-wrapper {
+    position: relative;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(59, 130, 246, 0.85), rgba(67, 56, 202, 0.9));
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+.gallagher-signup-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: var(--bg-image, url('https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80'));
+    background-size: cover;
+    background-position: center;
+    z-index: -2;
+}
+
+.gallagher-signup-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(59, 130, 246, 0.85), rgba(67, 56, 202, 0.9));
+    z-index: -1;
+}
+
+.gallagher-main-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 1400px;
+    height: 100vh;
+    gap: 0;
+}
+
+.gallagher-form-only-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+/* ==========================================================================
+   Carousel Section
+   ========================================================================== */
+
+.gallagher-carousel-section {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(88, 28, 135, 0.8), rgba(59, 130, 246, 0.85), rgba(67, 56, 202, 0.9));
+}
+
+.gallagher-carousel-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.gallagher-carousel-images::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.gallagher-carousel-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 10;
+    max-width: 500px;
+    width: 90%;
+}
+
+.gallagher-carousel-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    z-index: 15;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    transform: translateY(-50%);
+}
+
+.gallagher-nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.gallagher-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.gallagher-play-pause-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    z-index: 15;
+}
+
+.gallagher-play-pause-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.gallagher-carousel-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 15;
+}
+
+.gallagher-progress-bar-fill {
+    height: 100%;
+    background: white;
+    width: 0%;
+    transition: width linear;
+}
+
+.gallagher-school-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.gallagher-school-tagline {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    margin-bottom: 3rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.gallagher-slide-content {
+    margin-bottom: 3rem;
+}
+
+.gallagher-slide-title {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.gallagher-slide-subtitle {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-bottom: 2rem;
+    line-height: 1.4;
+}
+
+.gallagher-slide-cta {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    text-shadow: none;
+}
+
+.gallagher-slide-cta:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+}
+
+/* Carousel Dots */
+.gallagher-carousel-dots {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.75rem;
+    z-index: 15;
+}
+
+.gallagher-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gallagher-dot:hover,
+.gallagher-dot.active {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.2);
+}
+
+/* ==========================================================================
+   Form Section
+   ========================================================================== */
+
+.gallagher-form-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    position: relative;
+}
+
+.gallagher-signup-card {
+    width: 100%;
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 10;
+}
+
+/* Progress Steps */
+.gallagher-progress-steps {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+    gap: 0;
+}
+
+.gallagher-step {
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.gallagher-step-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #e5e7eb;
+    color: #9ca3af;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.gallagher-step.active .gallagher-step-circle {
+    background: #000000;
+    color: white;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.gallagher-step.completed .gallagher-step-circle {
+    background: #10b981;
+    color: white;
+}
+
+.gallagher-step-line {
+    width: 60px;
+    height: 2px;
+    background: #e5e7eb;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.gallagher-step-line.completed {
+    background: #10b981;
+}
+
+/* Form Header */
+.gallagher-form-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-form-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #111827;
+}
+
+.gallagher-form-subtitle {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+/* Progress Bar */
+.gallagher-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #e5e7eb;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.gallagher-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+    border-radius: 2px;
+    transition: width 0.5s ease;
+}
+
+/* Messages */
+.gallagher-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+}
+
+.gallagher-message.gallagher-error {
+    background: #fef2f2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+}
+
+.gallagher-message.gallagher-success {
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+}
+
+/* ==========================================================================
+   Form Styles
+   ========================================================================== */
+
+.gallagher-form {
+    position: relative;
+}
+
+.gallagher-form-step {
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.gallagher-form-step.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.gallagher-form-group {
+    margin-bottom: 1rem;
+}
+
+.gallagher-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #374151;
+    font-size: 0.875rem;
+}
+
+.gallagher-form-group input,
+.gallagher-form-group select {
+    width: 100% !important;
+    padding: 0.875rem 1rem !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 0.625rem !important;
+    font-size: 1rem !important;
+    transition: all 0.2s ease !important;
+    background: white !important;
+    background-color: white !important;
+    box-sizing: border-box !important;
+    color: #374151 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    font-family: inherit !important;
+    line-height: 1.5 !important;
+    outline: none !important;
+}
+
+/* Enhanced select styling with stronger specificity */
+.gallagher-signup-card select,
+.gallagher-form-group select,
+select[id="experience"],
+select[id="hearAbout"] {
+    width: 100% !important;
+    padding: 0.875rem 2.5rem 0.875rem 1rem !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 0.625rem !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    transition: all 0.2s ease !important;
+    background: white !important;
+    background-color: white !important;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 0.7rem center !important;
+    background-size: 1.2em 1.2em !important;
+    box-sizing: border-box !important;
+    color: #374151 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    font-family: inherit !important;
+    line-height: 1.5 !important;
+    outline: none !important;
+    cursor: pointer !important;
+}
+
+/* Hover and focus states for selects */
+.gallagher-signup-card select:hover,
+.gallagher-form-group select:hover,
+select[id="experience"]:hover,
+select[id="hearAbout"]:hover {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.gallagher-signup-card select:focus,
+.gallagher-form-group select:focus,
+select[id="experience"]:focus,
+select[id="hearAbout"]:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    outline: none !important;
+}
+
+/* Select option styling */
+.gallagher-signup-card select option,
+.gallagher-form-group select option {
+    color: #374151 !important;
+    background: white !important;
+    padding: 0.5rem !important;
+}
+
+.gallagher-form-group input:focus,
+.gallagher-form-group select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.gallagher-form-group small {
+    color: #6b7280;
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.gallagher-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Social Login */
+.gallagher-social-login {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    border-radius: 0.625rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    text-decoration: none;
+    width: 100%;
+}
+
+.gallagher-google-btn {
+    background: white;
+    color: #374151;
+    border: 1.5px solid #d1d5db;
+}
+
+.gallagher-google-btn:hover {
+    background: #f9fafb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.gallagher-apple-btn {
+    background: #000000;
+    color: white;
+    border: 1.5px solid #000000;
+}
+
+.gallagher-apple-btn:hover {
+    background: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Divider */
+.gallagher-divider {
+    position: relative;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.gallagher-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: #e5e7eb;
+}
+
+.gallagher-divider span {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0 1rem;
+    color: #6b7280;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Interests Grid */
+.gallagher-interests-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+/* Form layout - make it more rectangular */
+.gallagher-form-step-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.gallagher-form-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.gallagher-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    color: #374151;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+    margin-bottom: 0;
+}
+
+.gallagher-checkbox:hover {
+    background: #f9fafb;
+}
+
+.gallagher-checkbox input[type="checkbox"] {
+    display: none;
+}
+
+.gallagher-checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #d1d5db;
+    border-radius: 4px;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    background: white;
+}
+
+.gallagher-checkbox input[type="checkbox"]:checked + .gallagher-checkmark {
+    background: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.gallagher-checkbox input[type="checkbox"]:checked + .gallagher-checkmark::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* Form Navigation */
+.gallagher-form-nav {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.gallagher-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.625rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: none;
+    font-size: 0.875rem;
+}
+
+.gallagher-btn-primary {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.3);
+}
+
+.gallagher-btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.4);
+}
+
+.gallagher-btn-back {
+    background: transparent;
+    color: #6b7280;
+    border: 1.5px solid #d1d5db;
+}
+
+.gallagher-btn-back:hover {
+    background: #f9fafb;
+    color: #374151;
+}
+
+.gallagher-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+/* Form Footer */
+.gallagher-form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+}
+
+.gallagher-form-footer a {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.gallagher-form-footer a:hover {
+    text-decoration: underline;
+}
+
+.gallagher-terms {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    line-height: 1.4;
+}
+
+.gallagher-terms a {
+    color: #3b82f6;
+    text-decoration: none;
+}
+
+.gallagher-terms a:hover {
+    text-decoration: underline;
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+    .gallagher-main-layout {
+        grid-template-columns: 1fr;
+        min-height: auto;
+    }
+    
+    .gallagher-carousel-section {
+        min-height: 50vh;
+        padding: 2rem;
+    }
+    
+    .gallagher-school-title {
+        font-size: 2.5rem;
+    }
+    
+    .gallagher-slide-title {
+        font-size: 1.5rem;
+    }
+    
+    .gallagher-form-section {
+        padding: 1rem;
+    }
+    
+    .gallagher-signup-card {
+        padding: 2rem;
+        margin: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .gallagher-signup-wrapper {
+        min-height: auto;
+        background-attachment: scroll;
+    }
+    
+    .gallagher-carousel-section {
+        min-height: 40vh;
+        padding: 1.5rem;
+    }
+    
+    .gallagher-school-title {
+        font-size: 2rem;
+    }
+    
+    .gallagher-school-tagline {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .gallagher-slide-title {
+        font-size: 1.25rem;
+    }
+    
+    .gallagher-slide-subtitle {
+        font-size: 1rem;
+    }
+    
+    .gallagher-signup-card {
+        padding: 1.5rem;
+        border-radius: 1rem;
+        margin: 0.5rem;
+    }
+    
+    .gallagher-form-title {
+        font-size: 1.5rem;
+    }
+    
+    .gallagher-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .gallagher-interests-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .gallagher-step-circle {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .gallagher-step-circle svg {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .gallagher-step-line {
+        width: 40px;
+    }
+    
+    .gallagher-form-nav {
+        flex-direction: column-reverse;
+        gap: 0.75rem;
+    }
+    
+    .gallagher-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .gallagher-carousel-section {
+        min-height: 35vh;
+        padding: 1rem;
+    }
+    
+    .gallagher-school-title {
+        font-size: 1.75rem;
+    }
+    
+    .gallagher-signup-card {
+        padding: 1rem;
+        margin: 0.25rem;
+    }
+    
+    .gallagher-social-login {
+        gap: 0.5rem;
+    }
+    
+    .gallagher-progress-steps {
+        transform: scale(0.9);
+    }
+    
+    .gallagher-interests-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   Flatsome Compatibility
+   ========================================================================== */
+
+/* Reset Flatsome defaults that might interfere */
+.gallagher-signup-wrapper * {
+    box-sizing: border-box;
+}
+
+.gallagher-signup-wrapper .row,
+.gallagher-signup-wrapper .col {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure our styles take precedence */
+.gallagher-signup-wrapper input,
+.gallagher-signup-wrapper select,
+.gallagher-signup-wrapper button {
+    font-family: inherit;
+    line-height: inherit;
+}
+
+/* Override Flatsome button styles specifically for our components */
+.gallagher-btn {
+    background-image: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+.gallagher-social-btn {
+    background-image: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+/* Ensure proper z-index stacking */
+.gallagher-signup-wrapper {
+    z-index: auto;
+    position: relative;
+}
+
+/* ==========================================================================
+   Additional Select Fixes for Maximum Compatibility
+   ========================================================================== */
+
+/* Ultra-specific selectors to override any theme styling */
+.gallagher-signup-wrapper .gallagher-signup-card .gallagher-form-group select,
+.gallagher-signup-wrapper select#experience,
+.gallagher-signup-wrapper select#hearAbout,
+body .gallagher-signup-card select {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    min-height: 45px !important;
+    padding: 0.875rem 2.5rem 0.875rem 1rem !important;
+    border: 1.5px solid #d1d5db !important;
+    border-radius: 0.625rem !important;
+    font-size: 1rem !important;
+    font-weight: 400 !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    color: #374151 !important;
+    background: white !important;
+    background-color: white !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+}
+
+/* Specific styling for placeholder/default option */
+.gallagher-signup-wrapper select option:first-child,
+.gallagher-signup-wrapper select option[value=""] {
+    color: #9ca3af !important;
+    background: white !important;
+}
+
+/* Force visibility on all form elements */
+.gallagher-signup-card .gallagher-form-group *,
+.gallagher-signup-card input,
+.gallagher-signup-card select,
+.gallagher-signup-card label {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: block !important;
+}
+
+.gallagher-signup-card .gallagher-form-group input,
+.gallagher-signup-card .gallagher-form-group select {
+    display: block !important;
+}
+
+/* Ensure text is visible */
+.gallagher-signup-card select,
+.gallagher-signup-card input {
+    text-indent: 0 !important;
+    text-align: left !important;
+    direction: ltr !important;
+}
+
+/* ==========================================================================
+   EMERGENCY DROPDOWN VISIBILITY FIXES - v3.1.0
+   ========================================================================== */
+
+/* Nuclear option: Force visibility on all selects */
+.gallagher-signup-wrapper select,
+#experience,
+#hearAbout {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    border: 2px solid #6b7280 !important;
+    border-radius: 8px !important;
+    padding: 12px 40px 12px 16px !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    text-align: left !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 16px 16px !important;
+    width: 100% !important;
+    min-height: 48px !important;
+    box-sizing: border-box !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    cursor: pointer !important;
+}
+
+/* Hover states */
+.gallagher-signup-wrapper select:hover,
+#experience:hover,
+#hearAbout:hover {
+    border-color: #3b82f6 !important;
+    background-color: #f8fafc !important;
+}
+
+/* Focus states */
+.gallagher-signup-wrapper select:focus,
+#experience:focus,
+#hearAbout:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+    outline: none !important;
+}
+
+/* Option styling */
+.gallagher-signup-wrapper select option {
+    background-color: white !important;
+    color: #1f2937 !important;
+    padding: 8px 12px !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
+
+/* Default/placeholder option */
+.gallagher-signup-wrapper select option:first-child,
+.gallagher-signup-wrapper select option[value=""] {
+    color: #9ca3af !important;
+    font-style: italic !important;
+}
+
+/* Remove any inherited text effects */
+.gallagher-signup-wrapper select,
+.gallagher-signup-wrapper select * {
+    text-decoration: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    word-spacing: normal !important;
+    font-variant: normal !important;
+}
+
+/* ==========================================================================
+   CUSTOM CHECKBOX & SELECT COMPONENTS - v3.4.0
+   ========================================================================== */
+
+/* Custom Checkbox Styling */
+.gallagher-custom-checkbox {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    cursor: pointer !important;
+    user-select: none !important;
+}
+
+.gallagher-custom-checkbox input[type="checkbox"] {
+    position: absolute !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+.gallagher-checkbox-box {
+    width: 16px !important;
+    height: 16px !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 4px !important;
+    background: white !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s ease !important;
+    flex-shrink: 0 !important;
+    cursor: pointer !important;
+}
+
+.gallagher-custom-checkbox input[type="checkbox"]:checked + .gallagher-checkbox-box {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+    color: white !important;
+}
+
+.gallagher-checkbox-check {
+    width: 12px !important;
+    height: 12px !important;
+    fill: currentColor !important;
+}
+
+.gallagher-custom-checkbox:hover .gallagher-checkbox-box {
+    border-color: #6b7280 !important;
+}
+
+.gallagher-custom-checkbox span {
+    font-size: 14px !important;
+    color: #374151 !important;
+    cursor: pointer !important;
+}
+
+/* Custom Select with Chevron */
+.gallagher-custom-select {
+    position: relative !important;
+    display: block !important;
+    width: 100% !important;
+}
+
+.gallagher-custom-select select {
+    width: 100% !important;
+    height: 44px !important;
+    padding: 8px 40px 8px 12px !important;
+    background: white !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 8px !important;
+    color: #1f2937 !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    cursor: pointer !important;
+    outline: none !important;
+    transition: border-color 0.2s ease !important;
+}
+
+.gallagher-custom-select select:focus {
+    border-color: #3b82f6 !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
+}
+
+.gallagher-custom-select select:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+}
+
+.gallagher-select-chevron {
+    position: absolute !important;
+    right: 12px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    width: 16px !important;
+    height: 16px !important;
+    color: #6b7280 !important;
+    pointer-events: none !important;
+}
+
+/* Override all existing checkbox styles in WordPress */
+.gallagher-signup-card input[type="checkbox"] {
+    display: none !important;
+}
+
+/* Rectangular form layout */
+.gallagher-form-step-content {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 2rem !important;
+    margin-bottom: 1.5rem !important;
+}
+
+.gallagher-form-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+}
+
+/* Mobile responsive adjustments */
+@media (max-width: 768px) {
+    .gallagher-signup-card {
+        max-width: 95vw !important;
+        margin: 0.5rem !important;
+        padding: 1.5rem !important;
+    }
+    
+    .gallagher-form-step-content {
+        grid-template-columns: 1fr !important;
+        gap: 1rem !important;
+    }
+    
+    .gallagher-interests-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* ==========================================================================
+   CHECKBOX FIXES - v3.3.0
+   ========================================================================== */
+
+/* Fix checkbox styling - make them small, not huge buttons */
+.gallagher-signup-card input[type="checkbox"] {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+    min-height: 16px !important;
+    max-width: 16px !important;
+    max-height: 16px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    display: inline-block !important;
+    position: relative !important;
+    vertical-align: middle !important;
+}
+
+.gallagher-signup-card input[type="checkbox"]:checked {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+}
+
+.gallagher-signup-card input[type="checkbox"]:checked::after {
+    content: '✓' !important;
+    position: absolute !important;
+    top: -1px !important;
+    left: 2px !important;
+    color: white !important;
+    font-size: 11px !important;
+    font-weight: bold !important;
+    line-height: 1 !important;
+}
+
+/* Checkbox container improvements */
+.gallagher-interests-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 8px !important;
+    margin-top: 8px !important;
+}
+
+.gallagher-interests-grid .gallagher-form-group {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    margin-bottom: 0 !important;
+}
+
+.gallagher-interests-grid .gallagher-form-group label {
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+    cursor: pointer !important;
+}
+
+/* Make form wider and more compact */
+.gallagher-signup-card {
+    width: 100% !important;
+    max-width: 750px !important;
+    padding: 24px !important;
+}
+
+.gallagher-form-step {
+    margin-bottom: 16px !important;
+}
+
+.gallagher-form-group {
+    margin-bottom: 16px !important;
+}
+
+/* ==========================================================================
+   ABSOLUTE NUCLEAR FIXES - v3.3.0 - Use HTML select as fallback
+   ========================================================================== */
+
+/* Hide our custom styled selects if they're still invisible */
+.gallagher-signup-wrapper .gallagher-form-group select {
+    position: relative !important;
+    z-index: 1000 !important;
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    width: 100% !important;
+    height: 48px !important;
+    padding: 12px 40px 12px 16px !important;
+    font-size: 16px !important;
+    font-family: Arial, sans-serif !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #1f2937 !important;
+    background-color: #ffffff !important;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 12px center !important;
+    background-size: 16px 16px !important;
+    border: 2px solid #6b7280 !important;
+    border-radius: 8px !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    cursor: pointer !important;
+    text-align: left !important;
+    text-indent: 0 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+}
+
+/* Force visibility on the select elements themselves */
+select[id="experience"],
+select[id="hearAbout"],
+.gallagher-signup-wrapper select {
+    all: unset !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 48px !important;
+    padding: 12px 40px 12px 16px !important;
+    font-size: 16px !important;
+    font-family: Arial, sans-serif !important;
+    font-weight: 400 !important;
+    line-height: 1.2 !important;
+    color: #1f2937 !important;
+    background: #ffffff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23374151' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6,9 12,15 18,9'%3E%3C/polyline%3E%3C/svg%3E") no-repeat right 12px center/16px 16px !important;
+    border: 2px solid #6b7280 !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 999 !important;
+}
+
+/* Style the option elements */
+select[id="experience"] option,
+select[id="hearAbout"] option,
+.gallagher-signup-wrapper select option {
+    color: #1f2937 !important;
+    background-color: #ffffff !important;
+    padding: 8px 12px !important;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+}
+
+/* Ensure the first option (placeholder) is styled differently */
+select[id="experience"] option:first-child,
+select[id="hearAbout"] option:first-child,
+.gallagher-signup-wrapper select option[value=""] {
+    color: #9ca3af !important;
+    font-style: italic !important;
+}
