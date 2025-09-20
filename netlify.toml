@@ -3,4 +3,4 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20.18.0"  # LTS, avoids odd bundling issues
+  NODE_VERSION = "22"
