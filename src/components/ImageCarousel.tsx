@@ -1,28 +1,39 @@
-import { useState, useEffect } from 'react';
-import { ImageWithFallback } from './figma/ImageWithFallback';
-import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect } from "react";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
+import { motion, AnimatePresence } from "framer-motion";
 
-const slides = [
+type Slide = {
+  image: string;
+  title: string;
+  subtitle: string;
+};
+
+const slides: Slide[] = [
   {
-    image: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/images/painting-one.png",
     title: "Master the Art of Drawing",
-    subtitle: "From beginner sketches to advanced techniques"
+    subtitle: "From beginner sketches to advanced techniques",
   },
   {
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/images/underhisvery-copy.jpeg",
     title: "Explore Vibrant Painting",
-    subtitle: "Watercolors, oils, and mixed media"
+    subtitle: "Watercolors, oils, and mixed media",
   },
   {
-    image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-    title: "Digital Art & Design",
-    subtitle: "Modern techniques for the digital age"
+    image: "/images/palette.webp",
+    title: "Color Theory Mastery",
+    subtitle: "Understanding color relationships and harmony",
   },
   {
-    image: "https://images.unsplash.com/photo-1452457807411-4979b707c5be?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    image: "/images/sculpture011.webp",
     title: "Sculpture & 3D Art",
-    subtitle: "Shape your imagination into reality"
-  }
+    subtitle: "Shape your imagination into reality",
+  },
+  {
+    image: "/images/frank-stella-sm.webp",
+    title: "Mixed Media AI & Collage",
+    subtitle: "Combine traditional and AI-generated materials",
+  },
 ];
 
 export function ImageCarousel() {
@@ -32,7 +43,6 @@ export function ImageCarousel() {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 4000);
-
     return () => clearInterval(timer);
   }, []);
 
@@ -46,6 +56,7 @@ export function ImageCarousel() {
           exit={{ opacity: 0, scale: 0.9 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
           className="absolute inset-0"
+          aria-hidden
         >
           <div className="relative h-full">
             <ImageWithFallback
@@ -84,13 +95,14 @@ export function ImageCarousel() {
         </motion.div>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-2">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
+              aria-label={`Go to slide ${index + 1}`}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-white' : 'bg-white/50'
+                index === currentSlide ? "bg-white" : "bg-white/50"
               }`}
             />
           ))}
@@ -99,3 +111,5 @@ export function ImageCarousel() {
     </div>
   );
 }
+
+export default ImageCarousel;
