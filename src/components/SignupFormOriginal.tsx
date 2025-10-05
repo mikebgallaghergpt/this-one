@@ -14,7 +14,7 @@ import { ArrowLeft, ArrowRight, Mail, User, Palette, CheckCircle, AlertCircle, L
 import { Switch } from './ui/switch';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { projectId, publicAnonKey } from '../utils/supabase/info';
-
+import { createClient } from '@supabase/supabase-js';
 type Step = 'personal' | 'preferences' | 'account';
 
 interface FormData {
