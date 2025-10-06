@@ -416,106 +416,78 @@ export function SignupFormOriginal() {
   };
 
   const handleSubmit = async () => {
-    if (!validateStep('account')) return;
+  if (!validateStep('account')) return;
 
-    setIsLoading(true);
-    setError(null);
+  setIsLoading(true);
+  setError(null);
 
-    try {
-      const isBackendHealthy = await checkBackendHealth();
+  try {
+    const supabase = createClient(
+      `https://${projectId}.supabase.co`,
+      publicAnonKey
+    );
+
+    // Newsletter-only mode
+    if (formData.newsletterOnly) {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert({
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone: formData.phone || null,
+          newsletter: true,
+          newsletter_only: true,
+        });
+
+      if (profileError) throw profileError;
       
-      if (!isBackendHealthy) {
-        console.log('Running in demo mode - backend not available');
-        await new Promise(resolve => setTimeout(resolve, 2000));
-        
-        const demoUser = {
-          id: `demo_${Date.now()}`,
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          experience: formData.experience,
-          interests: formData.interests,
-          hearAboutUs: formData.hearAboutUs,
-          hearAboutUsOther: formData.hearAboutUsOther,
-          newsletter: formData.newsletter,
-          newsletterOnly: formData.newsletterOnly,
-          createdAt: new Date().toISOString(),
-          demoMode: true
-        };
-        
-        const existingUsers = JSON.parse(localStorage.getItem('gallagher_demo_users') || '[]');
-        existingUsers.push(demoUser);
-        localStorage.setItem('gallagher_demo_users', JSON.stringify(existingUsers));
-        
-        if (formData.newsletter) {
-          const existingSubscribers = JSON.parse(localStorage.getItem('gallagher_demo_subscribers') || '[]');
-          existingSubscribers.push({
-            userId: demoUser.id,
-            email: formData.email,
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            subscribedAt: new Date().toISOString()
-          });
-          localStorage.setItem('gallagher_demo_subscribers', JSON.stringify(existingSubscribers));
+      setSuccess(true);
+      console.log('Newsletter subscription created');
+      return;
+    }
+
+    // Full account creation
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+      options: {
+        data: {
+          first_name: formData.firstName,
+          last_name: formData.lastName,
         }
-        
-        setSuccess(true);
-        console.log('Demo account created successfully:', demoUser);
-        return;
       }
+    });
 
-      const wpProjectId = (window as any).gallagher_config?.supabase_project_id;
-      const wpAnonKey = (window as any).gallagher_config?.supabase_anon_key;
-      const activeProjectId = wpProjectId || projectId;
-      const activeAnonKey = wpAnonKey || publicAnonKey;
+    if (authError) throw authError;
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 30000);
-
-      const response = await fetch(`https://${activeProjectId}.supabase.co/functions/v1/make-server-9c2430a9/signup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${activeAnonKey}`,
-        },
-        body: JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          phone: formData.phone,
-          experience: formData.experience,
-          interests: formData.interests,
-          hearAboutUs: formData.hearAboutUs,
-          hearAboutUsOther: formData.hearAboutUsOther,
-          password: formData.password,
-          newsletter: formData.newsletter,
-          newsletterOnly: formData.newsletterOnly,
-        }),
-        signal: controller.signal,
+    // Insert profile
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .insert({
+        id: authData.user?.id,
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone: formData.phone || null,
+        experience: formData.experience || null,
+        interests: formData.interests,
+        how_heard: formData.hearAboutUs || null,
+        newsletter: formData.newsletter,
       });
 
-      clearTimeout(timeoutId);
-      const data = await response.json();
+    if (profileError) throw profileError;
 
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to create account');
-      }
+    setSuccess(true);
+    console.log('Account created successfully');
 
-      setSuccess(true);
-      console.log('Account created successfully:', data);
-
-    } catch (err: any) {
-      console.error('Signup error:', err);
-      if (err.name === 'AbortError') {
-        setError('Request timed out. Please check your connection and try again.');
-      } else {
-        setError(err.message || 'Failed to create account. Please try again.');
-      }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  } catch (err: any) {
+    console.error('Signup error:', err);
+    setError(err.message || 'Failed to create account. Please try again.');
+  } finally {
+    setIsLoading(false);
+  }
+};
 
   // Show loading state while component initializes
   if (!componentReady) {
