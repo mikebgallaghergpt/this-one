@@ -245,11 +245,9 @@ export function SignupFormOriginal() {
     return () => clearTimeout(timer);
   }, []);
 
- 
-
   const validateStep = (step: Step): boolean => {
     setError(null);
-    
+  
     switch (step) {
       case 'personal':
         if (!formData.firstName.trim()) {
