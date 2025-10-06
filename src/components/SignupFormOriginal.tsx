@@ -245,38 +245,7 @@ export function SignupFormOriginal() {
     return () => clearTimeout(timer);
   }, []);
 
-  const checkBackendHealth = async () => {
-    try {
-      const wpProjectId = (window as any).gallagher_config?.supabase_project_id;
-      const wpAnonKey = (window as any).gallagher_config?.supabase_anon_key;
-      const activeProjectId = wpProjectId || projectId;
-      const activeAnonKey = wpAnonKey || publicAnonKey;
-
-      if (!activeProjectId || !activeAnonKey) {
-        setBackendAvailable(false);
-        return false;
-      }
-
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 5000);
-
-      const response = await fetch(
-        `https://${activeProjectId}.supabase.co/functions/v1/make-server-9c2430a9/health`,
-        {
-          headers: { 'Authorization': `Bearer ${activeAnonKey}` },
-          signal: controller.signal,
-        }
-      );
-
-      clearTimeout(timeoutId);
-      setBackendAvailable(response.ok);
-      return response.ok;
-    } catch (err) {
-      console.log('Backend health check failed:', err);
-      setBackendAvailable(false);
-      return false;
-    }
-  };
+ 
 
   const validateStep = (step: Step): boolean => {
     setError(null);
